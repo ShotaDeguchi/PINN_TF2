@@ -4,10 +4,10 @@ This is an implementation of [PINN(s)](https://doi.org/10.1016/j.jcp.2018.10.045
 
 ## Solution
 FDM simulation (at t = 0.0, 2.0, 5.0 (s)):
-![FDM simulatioin](./figures/FDM.png)
+<img src="./figures/FDM.png">
 
 PINN solution (at t = 0.0, 2.0, 5.0 (s)):
-![FDM simulatioin](./figures/FDM.png)
+<img src="./figures/FDM.png">
 
 ## Usage
 Simply type
