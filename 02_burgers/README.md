@@ -1,12 +1,6 @@
 # PINN(s): Physics-Informed Neural Network(s)
 
-This is an implementation of [PINN(s)](https://doi.org/10.1016/j.jcp.2018.10.045) on TensorFlow 2 to solve Burgers equation under Dirichlet boundary condition without training data (data to fit initial & boundary conditions need to be provided). This is enabled by [automatic differentiation](https://arxiv.org/abs/1502.05767), which is a generalization of [back-propagation](https://doi.org/10.1038/323533a0). Within this code, PINN-derived solution is compared with FDM (Finite Difference Method) approximation to show a quantitative agreement. While [original work](https://github.com/maziarraissi/PINNs) is bulit on TensorFlow 1, this repository implements on TensorFlow 2 for GPU-utilized acceleration. Unlike 
-<br>
-<code>
-  02_wave
-</code>
-<br>
-directory, this repo utilizes keras packages for simple coding, and does not include [L-LAAF](https://doi.org/10.1098/rspa.2020.0334). 
+This is an implementation of [PINN(s)](https://doi.org/10.1016/j.jcp.2018.10.045) on TensorFlow 2 to solve Burgers equation under Dirichlet boundary condition without training data (data to fit initial & boundary conditions need to be provided). This is enabled by [automatic differentiation](https://arxiv.org/abs/1502.05767), which is a generalization of [back-propagation](https://doi.org/10.1038/323533a0). Within this code, PINN-derived solution is compared with FDM (Finite Difference Method) approximation to show a quantitative agreement. While [original work](https://github.com/maziarraissi/PINNs) is bulit on TensorFlow 1, this repository implements on TensorFlow 2 for GPU-utilized acceleration. Unlike <code> 02_wave </code>, this repo utilizes keras packages for simple coding, and does not include [L-LAAF](https://doi.org/10.1098/rspa.2020.0334). 
 
 ## Usage
 Simply type
