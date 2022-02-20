@@ -1,9 +1,6 @@
 # PINN(s): Physics-Informed Neural Network(s) on TensorFlow 2
 
-This repository includes [PINN(s)](https://doi.org/10.1016/j.jcp.2018.10.045) implementation on TensorFlow 2 to solve von Karman vortex streets (inverse problem, <code>01_von_Karman</code>), Burgers equation (forward problem, <code>02_Burgers</code>), and 2D wave equation (forward problem, <code>03_wave</code>). 
-
-<br>
-The power of [automatic differentiation](https://arxiv.org/abs/1502.05767), which is a generalization of [back-propagation](https://doi.org/10.1038/323533a0), is utilized to leverage the convenctional neural network architecture's expressive power. While [original work](https://github.com/maziarraissi/PINNs) is bulit on TensorFlow 1, this repository's codes implement on TensorFlow 2 for GPU-utilized acceleration
+This repository includes [PINN(s)](https://doi.org/10.1016/j.jcp.2018.10.045) implementation on TensorFlow 2 to solve von Karman vortex streets (inverse problem, <code>01_von_Karman</code>), Burgers equation (forward problem, <code>02_Burgers</code>), and 2D wave equation (forward problem, <code>03_wave</code>). [Automatic differentiation](https://arxiv.org/abs/1502.05767), which is a generalization of [back-propagation](https://doi.org/10.1038/323533a0), is utilized to leverage the convenctional neural network architecture's representation power. While [original work](https://github.com/maziarraissi/PINNs) bulids PINNs on TensorFlow 1, this repository's codes implement on TensorFlow 2 for GPU-based acceleration. 
 
 <br>
 Further descriptions (usage, option, etc.) can be found in the corresponding directories. 
