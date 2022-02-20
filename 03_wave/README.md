@@ -7,7 +7,7 @@ FDM simulation (at t = 0.0, 2.0, 5.0 (s)):
 <img src="./figures/FDM.png">
 
 PINN solution (at t = 0.0, 2.0, 5.0 (s)):
-<img src="./figures/FDM.png">
+<img src="./figures/PINN.png">
 
 ## Usage
 Simply type
