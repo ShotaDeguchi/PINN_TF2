@@ -5,9 +5,8 @@ This repository includes [PINN(s)](https://doi.org/10.1016/j.jcp.2018.10.045) im
 <br>
 The power of [automatic differentiation](https://arxiv.org/abs/1502.05767), which is a generalization of [back-propagation](https://doi.org/10.1038/323533a0), is utilized to leverage the convenctional neural network architecture's expressive power. While [original work](https://github.com/maziarraissi/PINNs) is bulit on TensorFlow 1, this repository's codes implement on TensorFlow 2 for GPU-utilized acceleration
 
-Further descriptions can be found in corresponding directories (usage, option, etc.). 
-
-This is an implementation of   to solve Burgers equation (1D NS equation eliminating pressure gradient) under Dirichlet boundary condition without training data (data to fit initial & boundary conditions need to be provided). . Unlike <code>03_wave</code>, this repo utilizes keras packages for simple coding, and does not include [L-LAAF](https://doi.org/10.1098/rspa.2020.0334). 
+<br>
+Further descriptions (usage, option, etc.) can be found in the corresponding directories. 
 
 ## Environment
 Tested on 
@@ -31,4 +30,3 @@ with the following:
 <br>
 [3] Rumelhart, D., Hinton, G., Williams, R.: Learning representations by back-propagating errors, *Nature*, Vol. 323, pp. 533–536, 1986. 
 <br>
-[4] Jagtap, A.D., Kawaguchi, K., Karniadakis, GE.: Locally adaptive activation functions with slope recovery for deep and physics-informed neural networks, *Proceedings of Royal Society A*, pp. 4762020033420200334, 2020. 
