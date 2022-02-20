@@ -2,6 +2,9 @@
 
 This is an implementation of [PINN(s)](https://doi.org/10.1016/j.jcp.2018.10.045) on TensorFlow 2 to solve 2D wave equation under Dirichlet / Neumann boundary condition without training data (data to fit initial & boundary conditions need to be provided). This is enabled by [automatic differentiation](https://arxiv.org/abs/1502.05767), which is a generalization of [back-propagation](https://doi.org/10.1038/323533a0). Within this, PINN-derived solution is compared with FDM (Finite Difference Method) approximation to show a quantitative agreement. While training could be accelerated with GPU-utilized learning, this code also implements [L-LAAF](https://doi.org/10.1098/rspa.2020.0334) for further speed-up. 
 
+## Solution plot
+![FDM simulatioin](./figures/FDM.png)
+
 ## Usage
 Simply type
 <br>
