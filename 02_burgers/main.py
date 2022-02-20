@@ -44,8 +44,7 @@ def main():
                 f_mntr = 10, r_seed = 1234)
 
     with tf.device("/device:GPU:0"):
-        pinn.train(int(3e3), n_btch, c_tol)
-        # pinn.train(n_epch, n_btch, c_tol)
+        pinn.train(n_epch, n_btch, c_tol)
 
     plot_loss(pinn.ep_log, pinn.loss_log)
 
