@@ -12,7 +12,7 @@ PINN solution (at t = 0.5, 1.5, 5.0 (s)):
 With the present setting, the error between FDM and PINN is as follows (scale: 1e-5):
 |t|0.5|1.5|5.0|
 | :---: | :---: | :---: | :---: |
-|mse|0.297|0.551|4.273|
+|mse|0.297(&plusmn;	)|0.551|4.273|
 |sem|0.003|0.004|0.028|
 
 ## Usage
