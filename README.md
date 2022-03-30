@@ -5,7 +5,7 @@ This repository stores [PINN(s)](https://doi.org/10.1016/j.jcp.2018.10.045) impl
 <br>
 Further descriptions (usage, option, etc.) can be found in the corresponding directories. 
 
-## CPU vs GPU
+## CPU vs. GPU
 By default, our code trains PINNs on GPU. To run on CPU, one should refer to
 <br>
 <code>
@@ -24,7 +24,7 @@ to
   with tf.device("/device:CPU:0"):
 </code>
 <br>
-in the corresponding directories. For our environment, GPU speed-up marked **20~25 times faster** training time than CPU-based learning (CPU: Intel Core i7-9700, GPU: NVIDIA GeForce RTX 2070). 
+in the corresponding directories. For our environment, GPU speed-up marked **20~25 times faster** training time than CPU-based learning (CPU: Intel Core i7-9700, GPU: NVIDIA GeForce RTX 2070). Mini-batch training is also possible if CPU/GPU memory does not fit, however, we recommend full-batching to appreciate the best speed-up possible (or large mini-batch size). 
 
 ## Dependencies
 Tested on 
