@@ -21,7 +21,7 @@ to run code (this includes PINN training, inferece, and visualization). Basic pa
 <br>
 and could be modified depending on the problem setup. 
 
-## Environment
+## Dependencies
 Tested on 
 <br>
 <code>
