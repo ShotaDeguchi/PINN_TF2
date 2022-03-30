@@ -17,7 +17,7 @@ to run the entire code. Basic parameters (e.g., network architecture, batch size
 <br>
 and could be modified depending on the problem setup. 
 
-## Environment
+## Dependencies
 Tested on 
 <br>
 <code>
