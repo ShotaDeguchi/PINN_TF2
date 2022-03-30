@@ -5,7 +5,7 @@ This repository stores [PINN(s)](https://doi.org/10.1016/j.jcp.2018.10.045) impl
 <br>
 Further descriptions (usage, option, etc.) can be found in the corresponding directories. 
 
-## Environment
+## Dependencies
 Tested on 
 <br>
 <code>
