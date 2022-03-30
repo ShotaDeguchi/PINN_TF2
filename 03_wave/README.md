@@ -29,7 +29,7 @@ to run the entire code (this includes FDM simulation, PINN training, inferece, a
 <br>
 and could be modified depending on the problem setup. 
 
-## Environment
+## Dependencies
 Tested on 
 <br>
 <code>
