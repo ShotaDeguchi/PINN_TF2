@@ -24,7 +24,7 @@ to
   with tf.device("/device:CPU:0"):
 </code>
 <br>
-in the corresponding directories. For our environment, GPU speed-up marked **20~25 times faster** than CPU-based learning (CPU: Intel Core i7-9700, GPU: NVIDIA GeForce RTX 2070). 
+in the corresponding directories. For our environment, GPU speed-up marked **20~25 times faster** training time than CPU-based learning (CPU: Intel Core i7-9700, GPU: NVIDIA GeForce RTX 2070). 
 
 ## Dependencies
 Tested on 
