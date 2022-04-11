@@ -17,7 +17,6 @@ depth = 4
 
 # training setting
 n_epch = int(5e4)
-n_epch = int(100)
 n_btch = int(0)
 c_tol  = 1e-8
 
