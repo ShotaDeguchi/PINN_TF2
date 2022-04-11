@@ -3,7 +3,7 @@
 This is an implementation of [PINN(s)](https://doi.org/10.1016/j.jcp.2018.10.045) on TensorFlow 2 to solve 1D linear diffusion equation under Dirichlet boundary condition without training data (data to fit initial & boundary conditions need to be provided). This is enabled by [automatic differentiation](https://arxiv.org/abs/1502.05767), which is a generalization of [back-propagation](https://doi.org/10.1038/323533a0). Within this code, PINN-derived solution is compared with FDM (Finite Difference Method) approximation to show a quantitative agreement. While [original work](https://github.com/maziarraissi/PINNs) is bulit on TensorFlow 1, this repository implements on TensorFlow 2 for GPU-utilized acceleration. 
 
 ## Solution
-PINN solution gives a good agreement with FDM simulation, while requiring shorter computation time. PINN inference takes 0.104 sec, which is 40 times faster than FDM simulation (4.268 sec for the same mesh). 
+PINN solution gives a good agreement with FDM simulation, while requiring shorter computation time. PINN inference takes 0.104 sec, which is **40 times faster** than FDM simulation (4.268 sec for the same mesh). 
 
 Qualitative comparison between FDM and PINN is as follows (black solid line: FDM, red dashed line: PINN). 
 <img src="./figures/diffusion.png">
