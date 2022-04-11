@@ -10,9 +10,11 @@ PINN solution (at t = 0.0, 0.2, 0.4, 0.6, 0.8, 1.0 (s)):
 <img src="./figures/PINN.png">
 
 With the present setting, the error between FDM and PINN is as follows (scale: 1e-5):
-|t|0.5|1.5|5.0|
-| :---: | :---: | :---: | :---: |
-|mse (&plusmn;sem)|0.297 (&plusmn;0.003)|0.551 (&plusmn;0.004)|4.273 (&plusmn;0.028)|
+|t|0.0|0.2|0.4|0.6|0.8|1.0|
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+|Rel L2 (scale: 1e-2)|1.358|0.509|0.359|0.272|0.265|2.839|
+|MSE    (scale: 1e-7)|9.175|1.290|0.640|0.368|0.348|0.401|
+|SEM    (scale: 1e-8)|8.359|1.384|0.525|0.283|0.243|0.762|
 
 ## Usage
 Simply type
