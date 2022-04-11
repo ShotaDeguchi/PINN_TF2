@@ -5,7 +5,7 @@ This repository stores [PINN(s)](https://doi.org/10.1016/j.jcp.2018.10.045) impl
 Further descriptions (usage, option, etc.) can be found in the corresponding directories. 
 
 ## Examples
-|1D Burgers|1D diffusion|2D wave|
+|1D Burgers (FDM vs. PINN)|1D diffusion (FDM vs. PINN)|2D wave (PINN)|
 |:---:|:---:|:---:|
 |![burgers](https://user-images.githubusercontent.com/49257696/162746099-bd030010-c819-4bba-87e9-cd1c26a59913.gif)|![diffusion](https://user-images.githubusercontent.com/49257696/162752724-ac8b022a-ab7a-4e45-9a74-e3dbee60113a.gif)|![wave](https://user-images.githubusercontent.com/49257696/162746233-4151ea3c-57b4-48ff-9f1c-d6fd69fe3dbb.gif)|
 
