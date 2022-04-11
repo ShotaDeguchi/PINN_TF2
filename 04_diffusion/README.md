@@ -4,7 +4,7 @@ This is an implementation of [PINN(s)](https://doi.org/10.1016/j.jcp.2018.10.045
 
 ## Solution
 FDM simulation (at t = 0.0, 0.2, 0.4, 0.6, 0.8, 1.0 (s)):
-<img src="./figures/FDM.png">
+<img src="./figures/0.0.jpg">
 
 PINN solution (at t = 0.0, 0.2, 0.4, 0.6, 0.8, 1.0 (s)):
 <img src="./figures/PINN.png">
