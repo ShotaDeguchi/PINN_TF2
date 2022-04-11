@@ -60,6 +60,12 @@ def main():
     t1 = time.time()
     elps = t1 - t0
     print("elapsed time for inference (sec):", elps)
+    plt.figure(figsize=(16, 4))
+    plt.subplot(1,2,1)
+    plt.imshow(u_hat, cmap="turbo", aspect=5)
+    plt.subplot(1,2,2)
+    plt.imshow(gv_hat, cmap="turbo", aspect=5)
+    plt.show()
 
     # FDM 
     t_num = np.linspace(tmin, tmax, nt, dtype = "float32")
@@ -88,13 +94,18 @@ def main():
     print("elapsed time for FDM (sec):", elps)
 
     # comparison
-    u_hat_ = u_hat.numpy().reshape(nx, nt)
+    u_hat_  = u_hat .numpy().reshape(nx, nt)
+    gv_hat_ = gv_hat.numpy().reshape(nx, nt)
     for n in range(nt):
         if n % int(nt/5) == 0:
-            norm = np.linalg.norm(u_num[:,n] - u_hat_[:,n], 2)
-            mse  = np.mean(np.square(u_num[:,n] - u_hat_[:,n]))
-            sem  = np.std(np.square(u_num[:,n] - u_hat_[:,n]), ddof = 1) / np.sqrt(u_num[:,n].shape[0])
-            print("t: %.3f, norm: %.6e, mse: %.6e, sem: %.6e" % (n/nt, norm, mse, sem))
+            norm_u = np.linalg.norm(u_num[:,n] - u_hat_[:,n], 2)
+            mse_u  = np.mean(np.square(u_num[:,n] - u_hat_[:,n]))
+            sem_u  = np.std (np.square(u_num[:,n] - u_hat_[:,n]), ddof = 1) / np.sqrt(u_hat_[:,n].shape[0])
+            norm_gv= np.linalg.norm(gv_hat_[:,n], 2)
+            mse_gv = np.mean(np.square(gv_hat_[:,n]))
+            sem_gv = np.std (np.square(gv_hat_[:,n]), ddof = 1) / np.sqrt(gv_hat_[:,n].shape[0])
+            print("t: %.3f, norm_u: %.6e, mse_u: %.6e, sem_u: %.6e, norm_gv: %.6e, mse_gv: %.6e, sem_gv: %.6e" 
+                % (n / nt, norm_u, mse_u, sem_u, norm_gv, mse_gv, sem_gv))
             
             plt.figure(figsize=(4, 4))
             plt.plot(x_num, u_num [:,n], label = "FDM",  color = "k", linestyle="-",  linewidth=3) 

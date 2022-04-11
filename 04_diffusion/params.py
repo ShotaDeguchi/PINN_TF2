@@ -42,7 +42,7 @@ lrd_cos = tf.keras.optimizers.schedules.CosineDecay(
     decay_steps = n_epch, 
     alpha = gam
     )
-lr = lrd_cos   # 1e-3 / lrd_exp / lrd_cos
+lr = lrd_cos   # 1e-3 / 5e-4 / lrd_exp / lrd_cos
 opt = "Adam"
 
 # weight
