@@ -66,7 +66,7 @@ def main():
     x_num = np.linspace(xmin, xmax, nx, dtype = "float32")
     dt_num = t_num[1] - t_num[0]
     dx_num = x_num[1] - x_num[0]
-    D_num = pinn.D
+    D_num = pinn.D.numpy()
     u_num = np.empty([nx, nt], dtype="float32")
     # initial condition
     for i in range(1, nx):
@@ -77,7 +77,6 @@ def main():
     u_num[ 0,:] = 0.
     u_num[-1,:] = 0.
 
-
     # FDM simulation
     t0 = time.time()
     for n in range(nt - 1):
@@ -87,7 +86,26 @@ def main():
     t1 = time.time()
     elps = t1 - t0
     print("elapsed time for FDM (sec):", elps)
-   
+
+    # comparison
+    u_hat_ = u_hat.numpy().reshape(nx, nt)
+    for n in range(nt):
+        if n % int(nt/5) == 0:
+            norm = np.linalg.norm(u_num[:,n] - u_hat_[:,n], 2)
+            mse  = np.mean(np.square(u_num[:,n] - u_hat_[:,n]))
+            sem  = np.std(np.square(u_num[:,n] - u_hat_[:,n]), ddof = 1) / np.sqrt(u_num[:,n].shape[0])
+            print("t: %.3f, norm: %.6e, mse: %.6e, sem: %.6e" % (n/nt, norm, mse, sem))
+            
+            plt.figure(figsize=(4, 4))
+            plt.plot(x_num, u_num [:,n], label = "FDM",  color = "k", linestyle="-",  linewidth=3) 
+            plt.plot(x_num, u_hat_[:,n], label = "PINN", color = "r", linestyle="--", linewidth=3)
+            plt.xlim(-1.2, 1.2)
+            plt.ylim(-1.2, 1.2)
+            plt.xlabel("x", fontstyle = "italic")
+            plt.ylabel("u", fontstyle = "italic")
+            plt.grid(alpha = .5)
+            plt.legend(loc = "lower right")
+            plt.show()
 
 if __name__ == "__main__":
     main()
