@@ -5,9 +5,10 @@ This is an implementation of [PINN(s)](https://doi.org/10.1016/j.jcp.2018.10.045
 ## Solution
 PINN solution gives a good agreement with FDM simulation, while requiring shorter computation time. PINN inference takes 0.104 sec, which is 40 times faster than FDM simulation (4.268 sec for the same mesh). 
 
+Qualitative comparison between FDM and PINN is as follows (black solid line: FDM, red dashed line: PINN). 
 <img src="./figures/diffusion.png">
 
-With the present setting, the error between FDM and PINN is as follows:
+Qantitative comparison between FDM and PINN is:
 |t|0.0|0.2|0.4|0.6|0.8|1.0|
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |Rel. L2 error (scale: 1e-2)|1.358|0.509|0.359|0.272|0.265|2.839|
