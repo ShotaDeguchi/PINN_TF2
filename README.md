@@ -4,6 +4,11 @@ This repository stores [PINN(s)](https://doi.org/10.1016/j.jcp.2018.10.045) impl
 
 Further descriptions (usage, option, etc.) can be found in the corresponding directories. 
 
+## Examples
+![burgers](https://user-images.githubusercontent.com/49257696/162746099-bd030010-c819-4bba-87e9-cd1c26a59913.gif)
+![diffusion](https://user-images.githubusercontent.com/49257696/162746524-4a5bb421-4924-4134-a65b-e2f73e09118c.gif)
+![wave](https://user-images.githubusercontent.com/49257696/162746233-4151ea3c-57b4-48ff-9f1c-d6fd69fe3dbb.gif)
+
 ## CPU vs. GPU
 By default, our code trains PINNs on GPU. To run on CPU, one should refer to
 <br>
