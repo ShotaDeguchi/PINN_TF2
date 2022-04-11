@@ -4,7 +4,6 @@ This is an implementation of [PINN(s)](https://doi.org/10.1016/j.jcp.2018.10.045
 
 ## Solution
 The following is the solution plot of the derived solution. Initial condition is negative sine curve, boundary condition is zero (Dirichlet). 
-<img src="./figures/Burgers.png">
 
 ## Usage
 Simply type
