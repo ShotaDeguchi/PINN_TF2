@@ -5,8 +5,7 @@ This is an implementation of [PINN(s)](https://doi.org/10.1016/j.jcp.2018.10.045
 ## Solution
 PINN solution gives a good agreement with FDM simulation, while requiring shorter computation time (PINN inference took 0.104 sec, FDM simulation had 4.268 sec for the same mesh size). 
 
-<img src="./figures/0.0.jpg">
-<img src="./figures/0.2.jpg">
+<img src="./figures/0.0.jpg", "./figures/0.2.jpg">
 <img src="./figures/0.8.jpg">
 
 
