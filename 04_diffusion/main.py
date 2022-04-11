@@ -60,11 +60,13 @@ def main():
     t1 = time.time()
     elps = t1 - t0
     print("elapsed time for inference (sec):", elps)
-    plt.figure(figsize=(16, 4))
+    plt.figure(figsize=(16, 3))
     plt.subplot(1,2,1)
-    plt.imshow(u_hat, cmap="turbo", aspect=5)
+    plt.imshow(u_hat.numpy().reshape(nx, nt), cmap="turbo", aspect=5, interpolation="bilinear", vmin=-1, vmax=1)
+    plt.colorbar()
     plt.subplot(1,2,2)
-    plt.imshow(gv_hat, cmap="turbo", aspect=5)
+    plt.imshow(gv_hat.numpy().reshape(nx, nt), cmap="coolwarm", aspect=5, interpolation="bilinear", vmin=-.1, vmax=.1)
+    plt.colorbar()
     plt.show()
 
     # FDM 
