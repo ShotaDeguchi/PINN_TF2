@@ -22,7 +22,7 @@ Simply type
   python main.py
 </code>
 <br>
-to run code (this includes PINN training, inferece, and visualization). Basic parameters (e.g., network architecture, batch size, initializer, etc.) are found in 
+to run code (this includes PINN training and inferece, followed by FDM simulation, comparison). Basic parameters (e.g., network architecture, batch size, initializer, etc.) are found in 
 <br>
 <code>
   params.py
