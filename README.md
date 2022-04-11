@@ -7,7 +7,7 @@ Further descriptions (usage, option, etc.) can be found in the corresponding dir
 ## Examples
 |1D Burgers|1D diffusion|2D wave|
 |:---:|:---:|:---:|
-|![burgers](https://user-images.githubusercontent.com/49257696/162746099-bd030010-c819-4bba-87e9-cd1c26a59913.gif)|![diffusion](https://user-images.githubusercontent.com/49257696/162748039-92d69754-8e32-463a-9df6-e9d1294aa317.gif)|![wave](https://user-images.githubusercontent.com/49257696/162746233-4151ea3c-57b4-48ff-9f1c-d6fd69fe3dbb.gif)|
+|![burgers](https://user-images.githubusercontent.com/49257696/162746099-bd030010-c819-4bba-87e9-cd1c26a59913.gif)|!![diffusion](https://user-images.githubusercontent.com/49257696/162752724-ac8b022a-ab7a-4e45-9a74-e3dbee60113a.gif)|![wave](https://user-images.githubusercontent.com/49257696/162746233-4151ea3c-57b4-48ff-9f1c-d6fd69fe3dbb.gif)|
 
 ## CPU vs. GPU
 By default, our code trains PINNs on GPU. To run on CPU, one should refer to
