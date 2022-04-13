@@ -28,7 +28,7 @@ to
   with tf.device("/device:CPU:0"):
 </code>
 <br>
-in the corresponding directories. For our environment, GPU speed-up marked **20~25 times faster** training time than CPU-based learning (CPU: Intel Core i7-9700, GPU: NVIDIA GeForce RTX 2070). Mini-batch training is also possible if the model does not fit CPU/GPU memory, however, we recommend full-batching to appreciate the best possible speed-up (or large mini-batch size). This is because CPU-GPU communication becomes frequent and slows down the overall performance when small mini-batch size is chosen. 
+in the corresponding directories. For our environment, GPU speed-up marked **25~30 times faster** training time than CPU-based learning (CPU: Intel Core i7-9700, GPU: NVIDIA GeForce RTX 2070). Mini-batch training is also possible if the model does not fit CPU/GPU memory, however, we recommend full-batching to appreciate the best possible speed-up (or large mini-batch size). This is because CPU-GPU communication becomes frequent and slows down the overall performance when small mini-batch size is chosen. 
 
 ## Dependencies
 Tested on 
