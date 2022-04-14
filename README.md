@@ -31,7 +31,7 @@ to
 in the corresponding directories. For our environment, GPU speed-up marked **25~30 times faster** training time than CPU-based learning (CPU: Intel Core i7-9700, GPU: NVIDIA GeForce RTX 2070). Mini-batch training is also possible if the model does not fit CPU/GPU memory, however, we recommend full-batching to appreciate the best possible speed-up (or large mini-batch size). This is because CPU-GPU communication becomes frequent and slows down the overall performance when small mini-batch size is chosen. 
 
 ## FDM vs. PINN
-For most of the problems, this repo compares solutions yielded by FDM (Finite Difference Method) and PINN. Difference between them (we define this as error of PINN solution) is reported in each directory. Regarding computational cost, PINN inference is faster than numerical integration by **~40x** for <code>04_diffusion</code>. It was challenging to compare it over other problems because we had to re-mesh the grid for FDM to converge (i.e. same mesh was employed for FDM and PINN in diffusion problem). 
+For most of the problems, this repo compares solutions yielded by FDM (Finite Difference Method) and PINN. Difference between them (we define this as error of PINN solution) is reported in each directory. Regarding computational cost, PINN inference is faster than numerical integration by **~40x** for <code>04_diffusion</code>. Fair comparison was challenging for other problems, because we had to re-mesh the grid for FDM to converge (i.e. same mesh was employed for FDM and PINN in diffusion problem). 
 
 ## Dependencies
 Tested on 
