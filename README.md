@@ -28,7 +28,7 @@ to
   with tf.device("/device:CPU:0"):
 </code>
 <br>
-in the corresponding directories. For our environment, GPU speed-up marked **25~30 times faster** training time than CPU-based learning (CPU: Intel Core i7-9700, GPU: NVIDIA GeForce RTX 2070). Mini-batch training is also possible if the model does not fit CPU/GPU memory, however, we recommend full-batching to appreciate the best possible speed-up (or large mini-batch size). This is because CPU-GPU communication becomes frequent and slows down the overall performance when small mini-batch size is chosen. 
+in the corresponding directories. For our environment, GPU speed-up marked **25~30 times faster** training time than CPU-based learning (Intel Core i7-9700 & NVIDIA GeForce RTX 2070 / AMD Core Ryzen9 5950X & NVIDIA GeForce RTX 3090). Mini-batch training is also possible if the model does not fit CPU/GPU memory, however, we recommend full-batching to appreciate the best possible speed-up (or large mini-batch size). This is because CPU-GPU communication becomes frequent and slows down the overall performance when small mini-batch size is chosen. 
 
 ## FDM vs. PINN
 For most of the problems, this repo compares solutions yielded by FDM (Finite Difference Method) and PINN. Difference between them (we define this as error of PINN solution) is reported in each directory. Regarding computational cost, PINN inference is faster than numerical integration by **~40x** for <code>04_diffusion</code>. Fair comparison was challenging for other problems, because we had to re-mesh the grid for FDM to converge (i.e. same mesh was employed for FDM and PINN in diffusion problem). 
@@ -41,11 +41,11 @@ Tested on
 </code>
 <br>
 with the following:
-|Package                      |Version|
+|Package|Version|
 | :---: | :---: |
-|numpy                        |1.22.1|
-|scipy                        |1.7.3|
-|tensorflow                   |2.8.0|
+|numpy|1.22.1|
+|scipy|1.7.3|
+|tensorflow|2.8.0|
 
 ## Reference
 [1] Raissi, M., Perdikaris, P., Karniadakis, G.E.: Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations, *Journal of Computational Physics*, Vol. 378, pp. 686-707, 2019. ([paper](https://doi.org/10.1016/j.jcp.2018.10.045))
