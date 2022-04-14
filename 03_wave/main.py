@@ -152,9 +152,10 @@ def main():
             ax.set_zlim(-1., 1.)
 
             u_diff = u_fdm - u_.numpy().reshape(nx, ny)
+            u_l2  = np.linalg.norm(u_diff, ord=2) / np.linalg.norm(u_fdm, ord=2)
             u_mse = np.mean(np.square(u_diff)) / np.sqrt(nx * ny)
             u_sem = np.std (np.square(u_diff), ddof = 1) / np.sqrt(nx * ny)
-            print("t: %.3f, mse: %.3e, sem: %.3e" % (t, u_mse, u_sem))
+            print("t: %.3f, l2: %.3e, mse: %.3e, sem: %.3e" % (t, u_l2, u_mse, u_sem))
 
 if __name__ == "__main__":
     main()

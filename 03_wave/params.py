@@ -14,7 +14,7 @@ depth = 4
 
 # training setting
 n_epch = int(5e4)
-n_btch = 2 ** 12   # 2 ** 6 = 64, 2 ** 8 = 256
+n_btch = 2 ** 12   # 2 ** 8 = 256, 2 ** 10 = 1024
 c_tol  = 1e-8
 
 # initializers
