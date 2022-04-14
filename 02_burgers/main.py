@@ -63,9 +63,9 @@ def main():
     # plot_sol1(TX, gv_hat.numpy(), -1, 1, .25)
 
     # FDM approximation
-    factor = 25
-    nt = int(factor * 1e3) + 1
-    nx = int(factor * 1e2) + 1
+    factor = 20
+    nt = int(factor * (nt - 1)) + 1
+    nx = int(factor * (nx - 1)) + 1
     t, x = np.linspace(tmin, tmax, nt), np.linspace(xmin, xmax, nx)
     dt, dx = t[1] - t[0], x[1] - x[0]
     print("dt: %.3e, dx: %.3e" % (dt, dx))
