@@ -20,6 +20,9 @@ def main():
 
     tmin, tmax, nt =  0., 1., int(1e3) + 1
     xmin, xmax, nx = -1., 1., int(2e2) + 1
+    factor = 5
+    tmin, tmax, nt =  0., 1., int(factor * 1e3) + 1
+    xmin, xmax, nx = -1., 1., int(factor * 2e2) + 1
     t, x, TX = prp_grd(tmin, tmax, nt, 
                        xmin, xmax, nx)
 
