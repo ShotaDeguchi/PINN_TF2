@@ -61,11 +61,16 @@ def main():
     print("elapsed time for PINN inference (min):", elps / 60.)
     plot_sol1(TX, u_hat .numpy(), -1, 1, .25)
     plot_sol1(TX, gv_hat.numpy(), -1, 1, .25)
+    print("u_hat.numpy().shape", u_hat.numpy().shape)
 
     # FDM approximation
     factor = 20
     nt = int(factor * (nt - 1)) + 1
     nx = int(factor * (nx - 1)) + 1
+    t, x, TX = prp_grd(
+        tmin, tmax, nt, 
+        xmin, xmax, nx
+    )
     t, x = np.linspace(tmin, tmax, nt), np.linspace(xmin, xmax, nx)
     dt, dx = t[1] - t[0], x[1] - x[0]
     print("dt: %.3e, dx: %.3e" % (dt, dx))
