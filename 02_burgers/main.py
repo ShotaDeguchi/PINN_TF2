@@ -4,6 +4,8 @@ main file to execute your program
 ********************************************************************************
 """
 
+import time
+import numpy as np
 import tensorflow as tf
 
 from pinn import PINN
@@ -48,9 +50,32 @@ def main():
 
     plot_loss(pinn.ep_log, pinn.loss_log)
 
+    # PINN inference
+    t0 = time.time()
     u_hat, gv_hat = pinn.predict(t, x)
-    plot_sol1(TX, u_hat.numpy(), -1, 1, .25)
-    plot_sol1(TX, gv_hat.numpy(), -1, 1, .25)
+    t1 = time.time()
+    elps = t1 - t0
+    print("elapsed time for PINN inference (sec):", elps)
+    print("elapsed time for PINN inference (min):", elps / 60.)
+    # plot_sol1(TX, u_hat .numpy(), -1, 1, .25)
+    # plot_sol1(TX, gv_hat.numpy(), -1, 1, .25)
+
+    # FDM approximation
+    t, x = np.linspace(tmin, tmax, nt), np.linspace(xmin, xmax, nx)
+    dt, dx = t[1] - t[0], x[1] - x[0]
+    nu = pinn.nu.numpy()
+    u = np.zeros([nx, nt])
+
+    # initial condition
+    for i in range(nx):
+        u[:,0] = - np.sin(np.pi * x)
+
+    t0 = time.time()
+    # for n in t:
+    t1 = time.time()
+    elps = t1 - t0
+    print("elapsed time for FDM simulation (sec):", elps)
+    print("elapsed time for FDM simulation (sec):", elps / 60.)
 
 if __name__ == "__main__":
     main()

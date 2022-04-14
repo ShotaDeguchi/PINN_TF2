@@ -10,7 +10,7 @@ import tensorflow as tf
 f_in  = 3
 f_out = 1
 width = 2 ** 8   # 2 ** 6 = 64, 2 ** 8 = 256
-depth = 6
+depth = 5
 
 # training setting
 n_epch = int(1e5)
