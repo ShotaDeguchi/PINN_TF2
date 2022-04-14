@@ -52,3 +52,4 @@ with the following:
 [2] Baydin, A.G., Pearlmutter, B.A., Radul, A.A., Siskind, J.M.: Automatic Differentiation in Machine Learning: A Survey, *Journal of Machine Learning Research*, Vol. 18, No. 1, pp. 5595–5637, 2018. 
 <br>
 [3] Rumelhart, D., Hinton, G., Williams, R.: Learning representations by back-propagating errors, *Nature*, Vol. 323, pp. 533–536, 1986. 
+[4] Loshchilov, I., Hutter, F.: SGDR: Stochastic Gradient Descent with Warm Restarts, ICLR, 2017. 
