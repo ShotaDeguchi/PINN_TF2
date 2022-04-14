@@ -59,11 +59,11 @@ def main():
     elps = t1 - t0
     print("elapsed time for PINN inference (sec):", elps)
     print("elapsed time for PINN inference (min):", elps / 60.)
-    plot_sol1(TX, u_hat .numpy(), -1, 1, .25)
+    # plot_sol1(TX, u_hat .numpy(), -1, 1, .25)
     # plot_sol1(TX, gv_hat.numpy(), -1, 1, .25)
 
     # FDM approximation
-    factor = 2.5
+    factor = 25
     nt = int(factor * 1e3) + 1
     nx = int(factor * 1e2) + 1
     t, x = np.linspace(tmin, tmax, nt), np.linspace(xmin, xmax, nx)
