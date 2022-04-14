@@ -48,15 +48,11 @@ def main():
     print("xmin: %.3f, xmax: %.3f, nx: %d, dx: %.3e" % (xmin, xmax, nx, dx))
     print("ymin: %.3f, ymax: %.3f, ny: %d, dy: %.3e" % (ymin, ymax, ny, dy))
 
-    # FDM for reference
-    t0 = time.time()
+    # FDM simulation
     u_FDM = FDM(xmin, xmax, nx, dx, 
-        ymin, ymax, ny, dy, 
-        nt, dt, 
-        x, y, u, c, BC)
-    t1 = time.time()
-    elps = t1 - t0
-    print("elapsed time for FDM: %.3f min (%.3f hr)" % (elps / 60, elps / 60 / 60))
+                ymin, ymax, ny, dy, 
+                nt, dt, 
+                x, y, u, c, BC)
 
     # prep data
     TX, lb, ub, \
@@ -74,39 +70,59 @@ def main():
                 f_scl, laaf, c, 
                 w_ini, w_bnd, w_pde, BC, 
                 f_mntr, r_seed)
+
     t0 = time.time()
     with tf.device("/device:GPU:0"):
         pinn.train(epoch = n_epch, batch = n_btch, tol = c_tol)
     t1 = time.time()
     elps = t1 - t0
-    print("elapsed time for training: %.3f min (%.3f hr)" % (elps / 60, elps / 60 / 60))
+    print(">>>>> elapse time for training (sec):", elps)
+    print(">>>>> elapse time for training (min):", elps / 60.)
 
-    x_inf = np.unique(TX[:,1:2])
-    y_inf = np.unique(TX[:,2:3])
-    x_inf, y_inf = np.meshgrid(x_inf, y_inf)
+    # inference
+    x_inf, y_inf = np.meshgrid(x_, y_)
     x_inf, y_inf = x_inf.reshape(-1, 1), y_inf.reshape(-1, 1)
-    t0 = time.time()
-    for n in range(nt):
-        if n % 100 == 0:
-            print("currently", n)
-        t = n * dt   # convert to real time
-        u_fdm = u_FDM[n,:,:]
-        n = np.array([n])
-        t_inf = np.unique(TX[:,0:1])
-        t_inf = np.tile(t_inf.reshape(-1, 1), (1, x_inf.shape[0])).T[:,n]
+    for t in t_:
+        t_inf = np.ones_like(x_inf) * t
+        t0 = time.time()
         u_, gv_ = pinn.infer(t_inf, x_inf, y_inf)
-    t1 = time.time()
-    elps = t1 - t0
-    print("elapsed time for inference: %.3f min (%.3f hr)" % (elps / 60, elps / 60 / 60))
+        t1 = time.time()
+        temp = t1 - t0
+        elps += temp
+    print(">>>>> elapse time for inference (sec):", elps)
+    print(">>>>> elapse time for inference (min):", elps / 60.)
+
+    # x_inf = np.unique(TX[:,1:2])
+    # y_inf = np.unique(TX[:,2:3])
+    # x_inf, y_inf = np.meshgrid(x_inf, y_inf)
+    # x_inf, y_inf = x_inf.reshape(-1, 1), y_inf.reshape(-1, 1)
+    # elps = 0.
+    # for n in range(nt):
+    #     if n % 100 == 0:
+    #         print("currently", n)
+    #     t = n * dt   # convert to real time
+    #     u_fdm = u_FDM[n,:,:]
+    #     n = np.array([n])
+    #     t_inf = np.unique(TX[:,0:1])
+    #     t_inf = np.tile(t_inf.reshape(-1, 1), (1, x_inf.shape[0])).T[:,n]
+    #     t0 = time.time()
+    #     u_, gv_ = pinn.infer(t_inf, x_inf, y_inf)
+    #     t1 = time.time()
+    #     temp = t1 - t0
+    #     elps += temp
+    # print(">>>>> elapse time for inference (sec):", elps)
+    # print(">>>>> elapse time for inference (min):", elps / 60.)
 
     plt.figure(figsize = (8, 4))
-    plt.plot(pinn.ep_log, pinn.loss_log,     alpha = .7, linestyle = "-", label = "loss")
-    plt.plot(pinn.ep_log, pinn.loss_ini_log, alpha = .5, linestyle = ":", label = "loss_ini")
-    plt.plot(pinn.ep_log, pinn.loss_bnd_log, alpha = .5, linestyle = ":", label = "loss_bnd")
-    plt.plot(pinn.ep_log, pinn.loss_pde_log, alpha = .5, linestyle = ":", label = "loss_pde")
+    plt.plot(pinn.ep_log, pinn.loss_log,     alpha = .7, linestyle = "-",  label = "loss", c = "k")
+    plt.plot(pinn.ep_log, pinn.loss_ini_log, alpha = .7, linestyle = "--", label = "loss_ini")
+    plt.plot(pinn.ep_log, pinn.loss_bnd_log, alpha = .7, linestyle = "--", label = "loss_bnd")
+    plt.plot(pinn.ep_log, pinn.loss_pde_log, alpha = .7, linestyle = "--", label = "loss_pde")
+    plt.yscale("log")
+    plt.xlabel("epoch")
+    plt.ylabel("loss")
     plt.legend(loc = "upper right")
     plt.grid(alpha = .5)
-    plt.yscale("log")
     plt.show()
 
     for n in range(nt):

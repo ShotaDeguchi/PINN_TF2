@@ -4,6 +4,7 @@ FDM for 2D wave equation
 ********************************************************************************
 """
 
+import time
 import numpy as np
 import matplotlib.pylab as plt
 
@@ -14,9 +15,11 @@ def FDM(xmin, xmax, nx, dx,
     # FDM for reference
     u[0, :, :] = np.exp(-(x - 3) ** 2) * np.exp(-(y - 3) ** 2)
     u[1, :, :] = u[0, :, :]
+
+    t0 = time.time()
     for n in range(1, nt - 1):
-        if n % int(1e2) == 0:
-            print(">>>>> FDM computing... n =", n)
+        # if n % int(1e2) == 0:
+        #     print(">>>>> FDM computing... n =", n)
         for i in range(1, nx - 1):
             for j in range(1, ny - 1):
                 u[n + 1, i, j] = 2 * u[n, i, j] - u[n - 1, i, j] \
@@ -44,6 +47,10 @@ def FDM(xmin, xmax, nx, dx,
             u[n, -1,  0] = (u[n, -2,  0] + u[n, -1,  1]) / 2
             u[n,  0, -1] = (u[n,  1, -1] + u[n,  0, -2]) / 2
             u[n, -1, -1] = (u[n, -2, -1] + u[n, -1, -2]) / 2
+    t1 = time.time()
+    elps = t1 - t0
+    print(">>>>> elapse time for FDM (sec):", elps)
+    print(">>>>> elapse time for FDM (min):", elps / 60.)
 
     # plot FDM solutions
     fig  = plt.figure(figsize = (16, 4))

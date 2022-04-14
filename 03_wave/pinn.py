@@ -54,8 +54,6 @@ class PINN:
 
         # bounds (for feature scaling)
         bounds  = tf.concat([x_pde, y_pde, t_pde], 1)
-        print(f"bounds.shape: {bounds.shape}")
-        print(f"bounds: {bounds}")
         self.lb = tf.cast(tf.reduce_min (bounds, axis = 0), self.dat_typ)
         self.ub = tf.cast(tf.reduce_max (bounds, axis = 0), self.dat_typ)
         self.mn = tf.cast(tf.reduce_mean(bounds, axis = 0), self.dat_typ)

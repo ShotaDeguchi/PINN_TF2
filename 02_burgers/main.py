@@ -38,7 +38,7 @@ def main():
     pinn = PINN(t_0, x_0, u_0, 
                 t_b, x_b, u_b, 
                 t_r, x_r, 
-                Rm = 2, Rn = 1, Rl = 100, depth = 5, activ = "tanh", BN = False, 
+                Rm = in_dim, Rn = out_dim, Rl = width, depth = depth, activ = "tanh", BN = False, 
                 w_init = "glorot_normal", b_init = "zeros", 
                 lr = lr, opt = opt, w_0 = 1., w_b = 1., w_r = 1.,
                 f_mntr = 10, r_seed = 1234)

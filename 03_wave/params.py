@@ -9,11 +9,11 @@ import tensorflow as tf
 # network structure
 f_in  = 3
 f_out = 1
-width = 2 ** 8   # 2 ** 6 = 64, 2 ** 8 = 256
-depth = 5 
+width = 2 ** 6   # 2 ** 6 = 64, 2 ** 8 = 256
+depth = 4
 
 # training setting
-n_epch = int(1e2)
+n_epch = int(5e4)
 n_btch = 2 ** 12   # 2 ** 6 = 64, 2 ** 8 = 256
 c_tol  = 1e-8
 
