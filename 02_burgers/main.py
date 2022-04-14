@@ -18,13 +18,8 @@ from plot_hist import *
 def main():
     config_gpu(gpu_flg = 1)
 
-    tmin, tmax, nt =  0., 1., int(1e3) + 1
-    xmin, xmax, nx = -1., 1., int(2e2) + 1
-    factor = 2
-    tmin, tmax, nt =  0., 1., int(factor * 1e3) + 1
-    xmin, xmax, nx = -1., 1., int(factor * 2e2) + 1
-    t, x, TX = prp_grd(tmin, tmax, nt, 
-                       xmin, xmax, nx)
+    tmin, tmax =  0., 1.
+    xmin, xmax = -1., 1.
 
     in_dim, out_dim, width, depth, \
         w_init, b_init, act, \
@@ -47,28 +42,33 @@ def main():
                 w_init = "glorot_normal", b_init = "zeros", 
                 lr = lr, opt = opt, w_0 = 1., w_b = 1., w_r = 1.,
                 f_mntr = 10, r_seed = 1234)
-
     with tf.device("/device:GPU:0"):
         pinn.train(n_epch, n_btch, c_tol)
-
-    plot_loss(pinn.ep_log, pinn.loss_log)
+    # plot_loss(pinn.ep_log, pinn.loss_log)
 
     # PINN inference
+    nt = int(1e3) + 1
+    nx = int(1e2) + 1
+    t, x, TX = prp_grd(
+        tmin, tmax, nt, 
+        xmin, xmax, nx
+    )
     t0 = time.time()
     u_hat, gv_hat = pinn.predict(t, x)
     t1 = time.time()
     elps = t1 - t0
     print("elapsed time for PINN inference (sec):", elps)
     print("elapsed time for PINN inference (min):", elps / 60.)
-    # plot_sol1(TX, u_hat .numpy(), -1, 1, .25)
+    plot_sol1(TX, u_hat .numpy(), -1, 1, .25)
     # plot_sol1(TX, gv_hat.numpy(), -1, 1, .25)
 
     # FDM approximation
-    factor = 5
-    tmin, tmax, nt =  0., 1., int(factor * 1e3) + 1
-    xmin, xmax, nx = -1., 1., int(factor * 2e2) + 1
+    factor = 2.5
+    nt = int(factor * 1e3) + 1
+    nx = int(factor * 1e2) + 1
     t, x = np.linspace(tmin, tmax, nt), np.linspace(xmin, xmax, nx)
     dt, dx = t[1] - t[0], x[1] - x[0]
+    print("dt: %.3e, dx: %.3e" % (dt, dx))
     nu = pinn.nu.numpy()
     u = np.zeros([nx, nt])
     # impose IC
