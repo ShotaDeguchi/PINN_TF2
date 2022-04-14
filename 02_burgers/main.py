@@ -59,8 +59,8 @@ def main():
     elps = t1 - t0
     print("elapsed time for PINN inference (sec):", elps)
     print("elapsed time for PINN inference (min):", elps / 60.)
-    # plot_sol1(TX, u_hat .numpy(), -1, 1, .25)
-    # plot_sol1(TX, gv_hat.numpy(), -1, 1, .25)
+    plot_sol1(TX, u_hat .numpy(), -1, 1, .25)
+    plot_sol1(TX, gv_hat.numpy(), -1, 1, .25)
 
     # FDM approximation
     factor = 20
@@ -85,6 +85,7 @@ def main():
     elps = t1 - t0
     print("elapsed time for FDM simulation (sec):", elps)
     print("elapsed time for FDM simulation (sec):", elps / 60.)
+    plot_sol1(TX, u.reshape(-1, 1), -1, 1, .25)
 
 if __name__ == "__main__":
     main()
