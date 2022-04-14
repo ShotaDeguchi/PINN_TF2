@@ -9,11 +9,11 @@ import tensorflow as tf
 # network structure
 f_in  = 3
 f_out = 1
-width = 2 ** 6   # 2 ** 6 = 64, 2 ** 8 = 256
-depth = 4
+width = 2 ** 8   # 2 ** 6 = 64, 2 ** 8 = 256
+depth = 6
 
 # training setting
-n_epch = int(5e4)
+n_epch = int(1e5)
 n_btch = 2 ** 12   # 2 ** 8 = 256, 2 ** 10 = 1024
 c_tol  = 1e-8
 
@@ -23,15 +23,15 @@ b_init = "zeros"
 act = "tanh"
 
 # optimization
-lr0 = 1e-2
+lr0 = 5e-3
 gam = 1e-2
 lrd_exp = tf.keras.optimizers.schedules.ExponentialDecay(
     initial_learning_rate = lr0, decay_steps = n_epch, decay_rate = gam, staircase=False)
 lrd_cos = tf.keras.optimizers.schedules.CosineDecay(
     initial_learning_rate = lr0, decay_steps = n_epch, alpha = gam)
-lr  = lrd_cos
+lr  = lrd_cos   # constant (1e-3, 5e-4) / lrd_exp / lrd_cos
 opt = "Adam"
-f_scl = "minmax"   # "minmax" or "mean"
+f_scl = "minmax"   # "minmax" / "mean"
 laaf = True
 
 # system params

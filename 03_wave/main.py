@@ -82,6 +82,7 @@ def main():
     # inference
     x_inf, y_inf = np.meshgrid(x_, y_)
     x_inf, y_inf = x_inf.reshape(-1, 1), y_inf.reshape(-1, 1)
+    elps = 0
     for t in t_:
         t_inf = np.ones_like(x_inf) * t
         t0 = time.time()
@@ -115,9 +116,9 @@ def main():
 
     plt.figure(figsize = (8, 4))
     plt.plot(pinn.ep_log, pinn.loss_log,     alpha = .7, linestyle = "-",  label = "loss", c = "k")
-    plt.plot(pinn.ep_log, pinn.loss_ini_log, alpha = .7, linestyle = "--", label = "loss_ini")
-    plt.plot(pinn.ep_log, pinn.loss_bnd_log, alpha = .7, linestyle = "--", label = "loss_bnd")
-    plt.plot(pinn.ep_log, pinn.loss_pde_log, alpha = .7, linestyle = "--", label = "loss_pde")
+    plt.plot(pinn.ep_log, pinn.loss_ini_log, alpha = .5, linestyle = "--", label = "loss_ini")
+    plt.plot(pinn.ep_log, pinn.loss_bnd_log, alpha = .5, linestyle = "--", label = "loss_bnd")
+    plt.plot(pinn.ep_log, pinn.loss_pde_log, alpha = .5, linestyle = "--", label = "loss_pde")
     plt.yscale("log")
     plt.xlabel("epoch")
     plt.ylabel("loss")
@@ -126,7 +127,7 @@ def main():
     plt.show()
 
     for n in range(nt):
-        if n % (int(nt / 10)) == 0:
+        if n % (int(nt / 20)) == 0:
             t = n * dt   # convert to real time
             u_fdm = u_FDM[n,:,:]
             n = np.array([n])
