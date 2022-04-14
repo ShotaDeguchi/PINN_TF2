@@ -18,8 +18,8 @@ from plot_hist import *
 def main():
     config_gpu(gpu_flg = 1)
 
-    tmin, tmax, nt =  0., 1., int(1e3) + 1
-    xmin, xmax, nx = -1., 1., int(2e2) + 1
+    tmin, tmax, nt =  0., 1., int(5e3) + 1
+    xmin, xmax, nx = -1., 1., int(1e3) + 1
     t, x, TX = prp_grd(tmin, tmax, nt, 
                        xmin, xmax, nx)
 
