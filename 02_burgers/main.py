@@ -19,7 +19,7 @@ def main():
     config_gpu(gpu_flg = 1)
 
     tmin, tmax, nt =  0., 1., int(1e3) + 1
-    xmin, xmax, nx = -1., 1., int(5e2) + 1
+    xmin, xmax, nx = -1., 1., int(2e2) + 1
     t, x, TX = prp_grd(tmin, tmax, nt, 
                        xmin, xmax, nx)
 
@@ -65,13 +65,16 @@ def main():
     dt, dx = t[1] - t[0], x[1] - x[0]
     nu = pinn.nu.numpy()
     u = np.zeros([nx, nt])
-
-    # initial condition
+    # impose IC
     for i in range(nx):
         u[:,0] = - np.sin(np.pi * x)
-
+    # explicit time integration
     t0 = time.time()
-    # for n in t:
+    for n in range(nt - 1):
+        for i in range(1, nx - 1):
+            u[i, n + 1] = u[i, n] \
+                - dt / dx * u[i, n] * (u[i, n] - u[i - 1, n]) \
+                + nu * dt / dx ** 2 * (u[i + 1, n] - 2 * u[i, n] + u[i - 1, n])
     t1 = time.time()
     elps = t1 - t0
     print("elapsed time for FDM simulation (sec):", elps)
