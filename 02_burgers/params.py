@@ -16,12 +16,8 @@ width = 2 ** 8   # 2 ** 6 = 64, 2 ** 8 = 256
 depth = 5
 
 # training setting
-n_epch = int(1e4)
+n_epch = int(3e4)
 n_btch = int(2 ** 12)
-
-n_epch = int(30)
-n_btch = 0
-
 c_tol  = 1e-8
 
 # dataset prep
