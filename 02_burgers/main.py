@@ -64,7 +64,7 @@ def main():
     print("u_hat.numpy().shape", u_hat.numpy().shape)
 
     # FDM approximation
-    factor = 20
+    factor = 10
     nt = int(factor * (nt - 1)) + 1
     nx = int(factor * (nx - 1)) + 1
     t, x, TX = prp_grd(
@@ -78,7 +78,8 @@ def main():
     u = np.zeros([nx, nt])
     # impose IC
     for i in range(nx):
-        u[:,0] = - np.sin(np.pi * x)
+        # u[:,0] = - np.sin(np.pi * x)
+        u[:,0] = - np.sin(2* np.pi * x)
     # explicit time integration
     t0 = time.time()
     for n in range(nt - 1):
