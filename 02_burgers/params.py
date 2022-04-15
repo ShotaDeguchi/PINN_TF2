@@ -18,8 +18,10 @@ depth = 5
 # training setting
 n_epch = int(3e4)
 n_btch = int(2 ** 12)
+
 n_epch = int(30)
 n_btch = int(0)
+
 c_tol  = 1e-8
 
 # dataset prep

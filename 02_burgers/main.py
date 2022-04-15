@@ -63,8 +63,7 @@ def main():
     plot_sol1(TX, gv_hat.numpy(), -1, 1, .25)
 
     # FDM approximation
-    factor = 10
-    factor = 1
+    factor = 20
     nt = int(factor * (nt - 1)) + 1
     nx = int(factor * (nx - 1)) + 1
     t, x, TX = prp_grd(
