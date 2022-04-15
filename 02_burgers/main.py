@@ -76,8 +76,7 @@ def main():
     u = np.zeros([nx, nt])
     # impose IC
     for i in range(nx):
-        # u[:,0] = - np.sin(np.pi * x)
-        u[:,0] = - np.sin(2* np.pi * x)
+        u[:,0] = - np.sin(np.pi * x)
     # explicit time integration
     t0 = time.time()
     for n in range(nt - 1):

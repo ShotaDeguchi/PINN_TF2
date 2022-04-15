@@ -8,8 +8,7 @@ import numpy as np
 import tensorflow as tf
 
 def func_u0(x):
-    # return - tf.sin(np.pi * x)
-    return - tf.sin(2* np.pi * x)
+    return - tf.sin(np.pi * x)
 
 def func_ub(x):
     n = x.shape[0]

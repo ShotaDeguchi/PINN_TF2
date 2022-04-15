@@ -29,7 +29,7 @@ N_r = int(1e4)   # evaluates PDE residual within the domain
 w_init = "Glorot"
 b_init = "zeros"
 act = "tanh"
-lr0 = 1e-2
+lr0 = 5e-3
 gam = 1e-2
 lrd_exp = tf.keras.optimizers.schedules.ExponentialDecay(
     initial_learning_rate = lr0, 
@@ -45,7 +45,7 @@ lrd_cos = tf.keras.optimizers.schedules.CosineDecay(
 lr = lrd_cos   # 1e-3 / lrd_exp / lrd_cos
 opt = "Adam"
 f_scl = "minmax"
-laaf = True
+laaf = False
 
 # system param
 rho = 1.
