@@ -26,9 +26,9 @@ N_b = int(1e3)   # evaluates boundary condition
 N_r = int(1e4)   # evaluates PDE residual within the domain
 
 
-N_0 = int(1e4)   # evaluates initial condition
-N_b = int(1e4)   # evaluates boundary condition
-N_r = int(5e4)   # evaluates PDE residual within the domain
+N_0 = int(2e4)   # evaluates initial condition
+N_b = int(3e4)   # evaluates boundary condition
+N_r = int(1e5)   # evaluates PDE residual within the domain
 
 
 # optimization
