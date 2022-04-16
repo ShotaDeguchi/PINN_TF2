@@ -43,8 +43,8 @@ def main():
                 lr = lr, opt = opt, w_0 = w_0, w_b = w_b, w_r = w_r,
                 f_mntr = f_mntr, r_seed = r_seed)
 
-    with tf.device("/device:CPU:0"):
-    # with tf.device("/device:GPU:0"):
+    # with tf.device("/device:CPU:0"):
+    with tf.device("/device:GPU:0"):
         pinn.train(n_epch, n_btch, c_tol)
 
     plt.figure(figsize=(8, 4))
