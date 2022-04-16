@@ -44,7 +44,10 @@ def main():
                 f_mntr = 10, r_seed = 1234)
     with tf.device("/device:GPU:0"):
         pinn.train(n_epch, n_btch, c_tol)
-    plot_loss(pinn.ep_log, pinn.loss_log)
+    plt.figure(figsize=(8,4))
+    plt.plot(pinn.ep_log, pinn.loss_log, alpha=.7)
+    plt.grid(alpha=.5)
+    plt.show()
 
     # PINN inference
     nt = int(1e3) + 1
