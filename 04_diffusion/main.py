@@ -59,7 +59,7 @@ def main():
     u_hat, gv_hat = pinn.infer(t, x)
     t1 = time.time()
     elps = t1 - t0
-    print("elapsed time for inference (sec):", elps)
+    print("elapsed time for PINN inference (sec):", elps)
     plt.figure(figsize=(16, 3))
     plt.subplot(1,2,1)
     plt.imshow(u_hat.numpy().reshape(nx, nt), cmap="turbo", aspect=5, interpolation="bilinear", vmin=-1, vmax=1)
@@ -93,7 +93,7 @@ def main():
                             + D_num * dt_num / dx_num ** 2 * (u_num[i+1, n] - 2 * u_num[i, n] + u_num[i-1, n])
     t1 = time.time()
     elps = t1 - t0
-    print("elapsed time for FDM (sec):", elps)
+    print("elapsed time for FDM simulation (sec):", elps)
 
     # comparison
     u_hat_  = u_hat .numpy().reshape(nx, nt)
