@@ -25,6 +25,13 @@ N_0 = int(1e3)   # evaluates initial condition
 N_b = int(1e3)   # evaluates boundary condition
 N_r = int(1e4)   # evaluates PDE residual within the domain
 
+
+N_0 = int(1e3)   # evaluates initial condition
+N_b = int(1e3)   # evaluates boundary condition
+N_r = int(1e4)   # evaluates PDE residual within the domain
+
+
+
 # optimization
 w_init = "glorot_normal"
 b_init = "zeros"
