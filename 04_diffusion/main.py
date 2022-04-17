@@ -64,10 +64,10 @@ def main():
     plt.figure(figsize=(16, 3))
     plt.subplot(1,2,1)
     plt.imshow(u_hat.numpy().reshape(nx, nt), cmap="turbo", aspect=5, interpolation="bilinear", vmin=-1, vmax=1)
-    plt.colorbar()
+    plt.colorbar(ticks = np.arange(-1, 1.1, .25))
     plt.subplot(1,2,2)
     plt.imshow(gv_hat.numpy().reshape(nx, nt), cmap="coolwarm", aspect=5, interpolation="bilinear", vmin=-.1, vmax=.1)
-    plt.colorbar()
+    plt.colorbar(ticks = np.arange(-1, 1.1, .25))
     plt.show()
 
     # FDM 
