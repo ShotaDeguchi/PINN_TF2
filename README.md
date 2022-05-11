@@ -41,7 +41,7 @@ Tested on
 </code>
 <br>
 with the following:
-|Package|Version|
+|Library / Package|Version|
 | :---: | :---: |
 |numpy|1.22.1|
 |scipy|1.7.3|
