@@ -46,13 +46,13 @@ def main():
     x_wst, y_wst, t_wst, u_wst, v_wst, p_wst = wst_dat(xmin, xmax, ymin, ymax, tmin, tmax, N_wst = int(1e4))
     x_pde, y_pde, t_pde = pde_dat(xmin, xmax, ymin, ymax, tmin, tmax, N_pde = int(5e4))
 
-    # plt.figure(figsize = (4, 4))
-    # plt.scatter(x_nth, y_nth, label = "north bound")
-    # plt.scatter(x_sth, y_sth, label = "south bound")
-    # plt.scatter(x_est, y_est, label = "east  bound")
-    # plt.scatter(x_wst, y_wst, label = "west  bound")
-    # plt.legend()
-    # plt.show()
+    plt.figure(figsize = (4, 4))
+    plt.scatter(x_nth, y_nth, label = "north bound")
+    plt.scatter(x_sth, y_sth, label = "south bound")
+    plt.scatter(x_est, y_est, label = "east  bound")
+    plt.scatter(x_wst, y_wst, label = "west  bound")
+    plt.legend()
+    plt.show()
 
     pinn = PINN(x_nth, y_nth, t_nth, u_nth, v_nth, p_nth, 
                 x_sth, y_sth, t_sth, u_sth, v_sth, p_sth, 

@@ -113,7 +113,7 @@ class PINN:
                 a = tf.constant(1., dtype = self.dat_typ)
             alphas .append(a)
         return weights, biases, alphas, params
-        
+
     def weight_init(self, shape, depth):
         in_dim  = shape[0]
         out_dim = shape[1]
@@ -131,7 +131,7 @@ class PINN:
             dtype = self.dat_typ, name = "w" + str(depth)
             )
         return weight
-    
+
     def bias_init(self, shape, depth):
         in_dim  = shape[0]
         out_dim = shape[1]
@@ -148,7 +148,7 @@ class PINN:
         else:
             raise NotImplementedError(">>>>> bias_init")
         return bias
-    
+
     def opt_(self, lr, opt):
         if opt == "SGD":
             optimizer = tf.keras.optimizers.SGD(

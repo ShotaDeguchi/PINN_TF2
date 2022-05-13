@@ -16,7 +16,7 @@ width = 2 ** 8   # 2 ** 6 = 64, 2 ** 8 = 256
 depth = 5
 
 # training setting
-n_epch = int(5e4)
+n_epch = int(1e2)
 n_btch = 0
 c_tol  = 1e-8
 
