@@ -43,8 +43,9 @@ For most of the problems, this repo compares solutions yielded by FDM (Finite Di
 |tensorflow|2.8.0|
 
 ## Citation
+Present code is summarized in our paper, please cite us as:
 ```
-@article{Shota DEGUCHI2021,
+@article{ShotaDEGUCHI2021,
   title={UNKNOWN PARAMETER ESTIMATION USING PHYSICS-INFORMED NEURAL NETWORKS WITH NOISED OBSERVATION DATA},
   author={Shota DEGUCHI and Yosuke SHIBATA and Mitsuteru ASAI},
   journal={Journal of Japan Society of Civil Engineers, Ser. A2 (Applied Mechanics (AM))},
