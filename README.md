@@ -34,13 +34,27 @@ in the corresponding directories. For our environment, GPU speed-up marked **25~
 For most of the problems, this repo compares solutions yielded by FDM (Finite Difference Method) and PINN. Difference between them (we define this as PINN solution error) is reported in each directory. Regarding computational cost, PINN inference is faster than numerical integration by **~40x** for <code>04_diffusion</code> in the same execution environment. Fair comparison was challenging for other problems, because we had to re-mesh the grid for FDM to converge (i.e. same mesh was employed for FDM and PINN in diffusion). 
 
 ## Dependencies
-<code>pip install -r requirements.txt</code> to have the identical environment as the author. Or install the following dependencies:
+<code>pip install -r requirements.txt</code> to have the identical environment as the author. Or install the following:
 
 |Library / Package|Version|
 | :---: | :---: |
 |numpy|1.22.1|
 |scipy|1.7.3|
 |tensorflow|2.8.0|
+
+## Citation
+```
+@article{Shota DEGUCHI2021,
+  title={UNKNOWN PARAMETER ESTIMATION USING PHYSICS-INFORMED NEURAL NETWORKS WITH NOISED OBSERVATION DATA},
+  author={Shota DEGUCHI and Yosuke SHIBATA and Mitsuteru ASAI},
+  journal={Journal of Japan Society of Civil Engineers, Ser. A2 (Applied Mechanics (AM))},
+  volume={77},
+  number={2},
+  pages={I_35-I_45},
+  year={2021},
+  doi={10.2208/jscejam.77.2_I_35}
+}
+```
 
 ## Reference
 [1] Raissi, M., Perdikaris, P., Karniadakis, G.E.: Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations, *Journal of Computational Physics*, Vol. 378, pp. 686-707, 2019. ([paper](https://doi.org/10.1016/j.jcp.2018.10.045))
