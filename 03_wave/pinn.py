@@ -3,7 +3,7 @@
 Author: Shota DEGUCHI
         Yosuke SHIBATA
         Structural Analysis Laboratory, Kyushu University (Jul. 19th, 2021)
-implementation of PINN - Physics-Informed Neural Network on TensorFlow 2
+implementation of PINN - Physics-Informed Neural Network in TensorFlow 2
 ********************************************************************************
 """
 
@@ -16,7 +16,8 @@ import tensorflow as tf
 class PINN:
     def __init__(self, 
                 t_ini, x_ini, y_ini, u_ini, 
-                t_bnd, x_bnd, y_bnd, 
+                t_bndx, x_bndx, y_bndx, 
+                t_bndy, x_bndy, y_bndy, 
                 t_pde, x_pde, y_pde, 
                 f_in, f_out, width, depth, 
                 w_init = "Glorot", b_init = "zeros", act = "tanh", 
@@ -49,7 +50,8 @@ class PINN:
 
         # dataset
         self.t_ini = t_ini; self.x_ini = x_ini; self.y_ini = y_ini; self.u_ini = u_ini
-        self.t_bnd = t_bnd; self.x_bnd = x_bnd; self.y_bnd = y_bnd
+        self.t_bndx = t_bndx; self.x_bndx = x_bndx; self.y_bndx = y_bndx
+        self.t_bndy = t_bndy; self.x_bndy = x_bndy; self.y_bndy = y_bndy
         self.t_pde = t_pde; self.x_pde = x_pde; self.y_pde = y_pde
 
         # bounds (for feature scaling)
@@ -228,8 +230,15 @@ class PINN:
         return u, gv
 
     def loss_ini(self, t, x, y, u):
-        u_, _ = self.pde(t, x, y)
-        loss = tf.reduce_mean(tf.square(u - u_))
+        with tf.GradientTape(persistent=True) as tp:
+            tp.watch(t)
+            tp.watch(x)
+            tp.watch(y)
+            u_, gv_ = self.pde(t, x, y)
+        u_t_ = tp.gradient(u_, t)
+        del tp
+        loss = tf.reduce_mean(tf.square(u - u_)) \
+                + tf.reduce_mean(tf.square(u_t_))
         return loss
 
     def loss_bnd(self, t, x, y):
@@ -249,6 +258,40 @@ class PINN:
             raise NotImplementedError(">>>>> loss_bnd")
         return loss
 
+    def loss_bndx(self, t, x, y):
+        if self.BC == "Dir":
+            u_, _ = self.pde(t, x, y)
+            loss = tf.reduce_mean(tf.square(u_))
+        elif self.BC == "Neu":
+            with tf.GradientTape(persistent = True) as tp:
+                tp.watch(t)
+                tp.watch(x)
+                tp.watch(y)
+                u_, _ = self.pde(t, x, y)
+            u_x_ = tp.gradient(u_, x)
+            del tp
+            loss = tf.reduce_mean(tf.square(u_x_))
+        else:
+            raise NotImplementedError(">>>>> loss_bnd")
+        return loss
+
+    def loss_bndy(self, t, x, y):
+        if self.BC == "Dir":
+            u_, _ = self.pde(t, x, y)
+            loss = tf.reduce_mean(tf.square(u_))
+        elif self.BC == "Neu":
+            with tf.GradientTape(persistent = True) as tp:
+                tp.watch(t)
+                tp.watch(x)
+                tp.watch(y)
+                u_, _ = self.pde(t, x, y)
+            u_y_ = tp.gradient(u_, y)
+            del tp
+            loss = tf.reduce_mean(tf.square(u_y_))
+        else:
+            raise NotImplementedError(">>>>> loss_bnd")
+        return loss
+
     def loss_pde(self, t, x, y):
         _, gv_ = self.pde(t, x, y)
         loss = tf.reduce_mean(tf.square(gv_))
@@ -257,21 +300,25 @@ class PINN:
     @tf.function
     def loss_glb(self, 
                 t_ini, x_ini, y_ini, u_ini, 
-                t_bnd, x_bnd, y_bnd, 
+                t_bndx, x_bndx, y_bndx, 
+                t_bndy, x_bndy, y_bndy, 
                 t_pde, x_pde, y_pde):
         loss_ini = self.loss_ini(t_ini, x_ini, y_ini, u_ini)
-        loss_bnd = self.loss_bnd(t_bnd, x_bnd, y_bnd)
+        loss_bnd = self.loss_bndx(t_bndx, x_bndx, y_bndx) \
+                    + self.loss_bndy(t_bndy, x_bndy, y_bndy)
         loss_pde = self.loss_pde(t_pde, x_pde, y_pde)
         loss = self.w_ini * loss_ini + self.w_bnd * loss_bnd + self.w_pde * loss_pde
         return loss
 
     def loss_grad(self, 
                 t_ini, x_ini, y_ini, u_ini, 
-                t_bnd, x_bnd, y_bnd, 
+                t_bndx, x_bndx, y_bndx, 
+                t_bndy, x_bndy, y_bndy, 
                 t_pde, x_pde, y_pde):
         with tf.GradientTape(persistent=True) as tp:
             loss = self.loss_glb(t_ini, x_ini, y_ini, u_ini, 
-                                t_bnd, x_bnd, y_bnd, 
+                                t_bndx, x_bndx, y_bndx, 
+                                t_bndy, x_bndy, y_bndy, 
                                 t_pde, x_pde, y_pde)
         grad = tp.gradient(loss, self.params)
         del tp
@@ -280,10 +327,12 @@ class PINN:
     @tf.function
     def grad_desc(self, 
                 t_ini, x_ini, y_ini, u_ini, 
-                t_bnd, x_bnd, y_bnd, 
+                t_bndx, x_bndx, y_bndx, 
+                t_bndy, x_bndy, y_bndy, 
                 t_pde, x_pde, y_pde):
         loss, grad = self.loss_grad(t_ini, x_ini, y_ini, u_ini, 
-                                    t_bnd, x_bnd, y_bnd, 
+                                    t_bndx, x_bndx, y_bndx, 
+                                    t_bndy, x_bndy, y_bndy, 
                                     t_pde, x_pde, y_pde)
         self.optimizer.apply_gradients(zip(grad, self.params))
         return loss
@@ -296,7 +345,8 @@ class PINN:
         print("         convergence tol:", tol)
         
         t_ini = self.t_ini; x_ini = self.x_ini; y_ini = self.y_ini; u_ini = self.u_ini
-        t_bnd = self.t_bnd; x_bnd = self.x_bnd; y_bnd = self.y_bnd
+        t_bndx = self.t_bndx; x_bndx = self.x_bndx; y_bndx = self.y_bndx
+        t_bndy = self.t_bndy; x_bndy = self.x_bndy; y_bndy = self.y_bndy
         t_pde = self.t_pde; x_pde = self.x_pde; y_pde = self.y_pde
         
         t0 = time.time()
@@ -312,17 +362,20 @@ class PINN:
             # full-batch training
             if batch == 0:
                 ep_loss = self.grad_desc(t_ini, x_ini, y_ini, u_ini, 
-                                         t_bnd, x_bnd, y_bnd, 
+                                         t_bndx, x_bndx, y_bndx, 
+                                         t_bndy, x_bndy, y_bndy, 
                                          t_pde, x_pde, y_pde)
                 ep_loss_ini = self.loss_ini(t_ini, x_ini, y_ini, u_ini)
-                ep_loss_bnd = self.loss_bnd(t_bnd, x_bnd, y_bnd)
+                ep_loss_bnd = self.loss_bndx(t_bndx, x_bndx, y_bndx) \
+                                + self.loss_bndy(t_bndy, x_bndy, y_bndy)
                 ep_loss_pde = self.loss_pde(t_pde, x_pde, y_pde)
             
             # mini-batch training
             else:
                 bound_b = min(self.x_ini.shape[0], 
-                            self.x_bnd.shape[0],
-                            self.x_pde.shape[0])
+                                self.x_bndx.shape[0],
+                                self.x_bndy.shape[0],
+                                self.x_pde.shape[0])
                 idx_b = np.random.permutation(bound_b)
 
                 for idx in range(0, bound_b, batch):
@@ -332,19 +385,24 @@ class PINN:
                     y_ini_b = tf.convert_to_tensor(y_ini.numpy()[idx_b[idx:idx+batch if idx+batch < bound_b else bound_b]], dtype = self.dat_typ)
                     u_ini_b = tf.convert_to_tensor(u_ini.numpy()[idx_b[idx:idx+batch if idx+batch < bound_b else bound_b]], dtype = self.dat_typ)
                     # batch for boudary condition
-                    t_bnd_b = tf.convert_to_tensor(t_bnd.numpy()[idx_b[idx:idx+batch if idx+batch < bound_b else bound_b]], dtype = self.dat_typ)
-                    x_bnd_b = tf.convert_to_tensor(x_bnd.numpy()[idx_b[idx:idx+batch if idx+batch < bound_b else bound_b]], dtype = self.dat_typ)
-                    y_bnd_b = tf.convert_to_tensor(y_bnd.numpy()[idx_b[idx:idx+batch if idx+batch < bound_b else bound_b]], dtype = self.dat_typ)
+                    t_bndx_b = tf.convert_to_tensor(t_bndx.numpy()[idx_b[idx:idx+batch if idx+batch < bound_b else bound_b]], dtype = self.dat_typ)
+                    x_bndx_b = tf.convert_to_tensor(x_bndx.numpy()[idx_b[idx:idx+batch if idx+batch < bound_b else bound_b]], dtype = self.dat_typ)
+                    y_bndx_b = tf.convert_to_tensor(y_bndx.numpy()[idx_b[idx:idx+batch if idx+batch < bound_b else bound_b]], dtype = self.dat_typ)
+                    t_bndy_b = tf.convert_to_tensor(t_bndy.numpy()[idx_b[idx:idx+batch if idx+batch < bound_b else bound_b]], dtype = self.dat_typ)
+                    x_bndy_b = tf.convert_to_tensor(x_bndy.numpy()[idx_b[idx:idx+batch if idx+batch < bound_b else bound_b]], dtype = self.dat_typ)
+                    y_bndy_b = tf.convert_to_tensor(y_bndy.numpy()[idx_b[idx:idx+batch if idx+batch < bound_b else bound_b]], dtype = self.dat_typ)
                     # batch for PDE residual
                     t_pde_b = tf.convert_to_tensor(t_pde.numpy()[idx_b[idx:idx+batch if idx+batch < bound_b else bound_b]], dtype = self.dat_typ)
                     x_pde_b = tf.convert_to_tensor(x_pde.numpy()[idx_b[idx:idx+batch if idx+batch < bound_b else bound_b]], dtype = self.dat_typ)
                     y_pde_b = tf.convert_to_tensor(y_pde.numpy()[idx_b[idx:idx+batch if idx+batch < bound_b else bound_b]], dtype = self.dat_typ)
                     # compute loss and perform gradient descent
                     loss_b = self.grad_desc(t_ini_b, x_ini_b, y_ini_b, u_ini_b, 
-                                            t_bnd_b, x_bnd_b, y_bnd_b, 
+                                            t_bndx_b, x_bndx_b, y_bndx_b, 
+                                            t_bndy_b, x_bndy_b, y_bndy_b, 
                                             t_pde_b, x_pde_b, y_pde_b)
                     loss_ini_b = self.loss_ini(t_ini_b, x_ini_b, y_ini_b, u_ini_b)
-                    loss_bnd_b = self.loss_bnd(t_bnd_b, x_bnd_b, y_bnd_b)
+                    loss_bnd_b = self.loss_bndx(t_bndx_b, x_bndx_b, y_bndx_b) \
+                                + self.loss_bndy(t_bndy_b, x_bndy_b, y_bndy_b) 
                     loss_pde_b = self.loss_pde(t_pde_b, x_pde_b, y_pde_b)
                     # per batch -> per epoch
                     ep_loss     += loss_b     / int(bound_b / batch)

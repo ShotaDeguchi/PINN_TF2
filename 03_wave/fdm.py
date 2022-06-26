@@ -18,8 +18,8 @@ def FDM(xmin, xmax, nx, dx,
 
     t0 = time.time()
     for n in range(1, nt - 1):
-        # if n % int(1e2) == 0:
-        #     print(">>>>> FDM computing... n =", n)
+        if n % int(1e2) == 0:
+            print(">>>>> FDM computing... n: %d, nt: %d" % (n, nt))
         for i in range(1, nx - 1):
             for j in range(1, ny - 1):
                 u[n + 1, i, j] = 2 * u[n, i, j] - u[n - 1, i, j] \

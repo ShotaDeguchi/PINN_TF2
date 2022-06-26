@@ -57,12 +57,16 @@ def main():
     # prep data
     TX, lb, ub, \
     t_ini, x_ini, y_ini, u_ini, \
-    t_bnd, x_bnd, y_bnd, \
+    t_bndx, x_bndx, y_bndx, \
+    t_bndy, x_bndy, y_bndy, \
     t_pde, x_pde, y_pde = prp_dat(t_, x_, y_, 
-                                    N_ini = int(5e3), N_bnd = int(1e4), N_pde = int(3e4))
+                                    N_ini = int(1e4), 
+                                    N_bnd = int(1e4), 
+                                    N_pde = int(5e4))
 
     pinn = PINN(t_ini, x_ini, y_ini, u_ini, 
-                t_bnd, x_bnd, y_bnd, 
+                t_bndx, x_bndx, y_bndx, 
+                t_bndy, x_bndy, y_bndy, 
                 t_pde, x_pde, y_pde, 
                 f_in, f_out, width, depth, 
                 w_init, b_init, act, 
@@ -116,9 +120,9 @@ def main():
 
     plt.figure(figsize = (8, 4))
     plt.plot(pinn.ep_log, pinn.loss_log,     alpha = .7, linestyle = "-",  label = "loss", c = "k")
-    plt.plot(pinn.ep_log, pinn.loss_ini_log, alpha = .5, linestyle = "--", label = "loss_ini")
-    plt.plot(pinn.ep_log, pinn.loss_bnd_log, alpha = .5, linestyle = "--", label = "loss_bnd")
-    plt.plot(pinn.ep_log, pinn.loss_pde_log, alpha = .5, linestyle = "--", label = "loss_pde")
+    # plt.plot(pinn.ep_log, pinn.loss_ini_log, alpha = .5, linestyle = "--", label = "loss_ini")
+    # plt.plot(pinn.ep_log, pinn.loss_bnd_log, alpha = .5, linestyle = "--", label = "loss_bnd")
+    # plt.plot(pinn.ep_log, pinn.loss_pde_log, alpha = .5, linestyle = "--", label = "loss_pde")
     plt.yscale("log")
     plt.xlabel("epoch")
     plt.ylabel("loss")
@@ -126,37 +130,68 @@ def main():
     plt.grid(alpha = .5)
     plt.show()
 
-    for n in range(nt):
-        if n % (int(nt / 20)) == 0:
-            t = n * dt   # convert to real time
-            u_fdm = u_FDM[n,:,:]
-            n = np.array([n])
+    for tm in range(nt):
+        if tm % 100 == 0:
+            tm = np.array([tm])
+
             t_inf = np.unique(TX[:,0:1])
             x_inf = np.unique(TX[:,1:2])
             y_inf = np.unique(TX[:,2:3])
+
             x_inf, y_inf = np.meshgrid(x_inf, y_inf)
             x_inf, y_inf = x_inf.reshape(-1, 1), y_inf.reshape(-1, 1)
-            t_inf = np.tile(t_inf.reshape(-1, 1), (1, x_inf.shape[0])).T[:,n]
-            u_, gv_ = pinn.infer(t_inf, x_inf, y_inf)
+            t_inf = np.tile(t_inf.reshape(-1, 1), (1, x_inf.shape[0])).T[:,tm]
 
-            fig = plt.figure(figsize=(16, 4))
-            ax = fig.add_subplot(1, 1, 1, projection = "3d")
-            ax.plot_surface(x, y, u_fdm, vmin = -1., vmax = 1.)
+            u_hat, gv_hat = pinn.infer(t_inf, x_inf, y_inf)
+
+            fig  = plt.figure(figsize = (6, 6))
+            ax   = fig.add_subplot(1, 1, 1, projection = "3d")
+            surf = ax.plot_surface(x, y, tf.reshape(u_hat, shape = [nx, ny]), cmap = "coolwarm", 
+                                linewidth = 0, vmin = -.5, vmax = .5)
+
             ax.set_xlim(xmin, xmax)
             ax.set_ylim(ymin, ymax)
-            ax.set_zlim(-1., 1.)
+            ax.set_zlim(-1, 1)
+            ax.set_xlabel("x", fontstyle = "italic")
+            ax.set_ylabel("y", fontstyle = "italic")
+            ax.set_zlabel("u (t, x, y)", fontstyle = "italic")
+            plt.show()
 
-            ax = fig.add_subplot(1, 2, 2, projection = "3d")
-            ax.plot_surface(x, y, u_.numpy().reshape(nx, ny), vmin = -1., vmax = 1.)
-            ax.set_xlim(xmin, xmax)
-            ax.set_ylim(ymin, ymax)
-            ax.set_zlim(-1., 1.)
+    # for n in range(nt):
+    #     if n % (int(nt / 5)) == 0:
+    #         t = n * dt   # convert to real time
+            # u_fdm = u_FDM[n,:,:]
+    #         n = np.array([n])
+    #         t_inf = np.unique(TX[:,0:1])
+    #         x_inf = np.unique(TX[:,1:2])
+    #         y_inf = np.unique(TX[:,2:3])
+    #         x_inf, y_inf = np.meshgrid(x_inf, y_inf)
+    #         x_inf, y_inf = x_inf.reshape(-1, 1), y_inf.reshape(-1, 1)
+    #         t_inf = np.tile(t_inf.reshape(-1, 1), (1, x_inf.shape[0])).T[:,n]
+    #         u_, gv_ = pinn.infer(t_inf, x_inf, y_inf)
 
-            u_diff = u_fdm - u_.numpy().reshape(nx, ny)
-            u_l2  = np.linalg.norm(u_diff, ord=2) / np.linalg.norm(u_fdm, ord=2)
-            u_mse = np.mean(np.square(u_diff)) / np.sqrt(nx * ny)
-            u_sem = np.std (np.square(u_diff), ddof = 1) / np.sqrt(nx * ny)
-            print("t: %.3f, l2: %.3e, mse: %.3e, sem: %.3e" % (t, u_l2, u_mse, u_sem))
+    #         fig = plt.figure(figsize=(16, 4))
+
+    #         ax = fig.add_subplot(1, 1, 1, projection = "3d")
+    #         ax.plot_surface(x, y, u_fdm, cmap="coolwarm", vmin = -1., vmax = 1.)
+    #         ax.set_xlim(xmin, xmax)
+    #         ax.set_ylim(ymin, ymax)
+    #         ax.set_zlim(-1., 1.)
+
+    #         ax = fig.add_subplot(1, 2, 2, projection = "3d")
+    #         ax.plot_surface(x, y, u_.numpy().reshape(nx, ny), cmap="coolwarm", vmin = -1., vmax = 1.)
+    #         ax.set_xlim(xmin, xmax)
+    #         ax.set_ylim(ymin, ymax)
+    #         ax.set_zlim(-1., 1.)
+
+    #         plt.show()
+
+            # u_fdm = u_FDM[tm,:,:]
+            # u_diff = u_fdm - u_.numpy().reshape(nx, ny)
+            # u_l2  = np.linalg.norm(u_diff, ord=2) / np.linalg.norm(u_fdm, ord=2)
+            # u_mse = np.mean(np.square(u_diff)) / np.sqrt(nx * ny)
+            # u_sem = np.std (np.square(u_diff), ddof = 1) / np.sqrt(nx * ny)
+            # print("t: %.3f, l2: %.3e, mse: %.3e, sem: %.3e" % (t, u_l2, u_mse, u_sem))
 
 if __name__ == "__main__":
     main()

@@ -13,8 +13,8 @@ width = 2 ** 8   # 2 ** 6 = 64, 2 ** 8 = 256
 depth = 5
 
 # training setting
-n_epch = int(1e5)
-n_btch = 2 ** 12   # 2 ** 8 = 256, 2 ** 10 = 1024
+n_epch = int(5e4)
+n_btch = 0
 c_tol  = 1e-8
 
 # initializers
@@ -29,10 +29,10 @@ lrd_exp = tf.keras.optimizers.schedules.ExponentialDecay(
     initial_learning_rate = lr0, decay_steps = n_epch, decay_rate = gam, staircase=False)
 lrd_cos = tf.keras.optimizers.schedules.CosineDecay(
     initial_learning_rate = lr0, decay_steps = n_epch, alpha = gam)
-lr  = lrd_cos   # constant (1e-3, 5e-4) / lrd_exp / lrd_cos
+lr  = 5e-4   # constant (1e-3 / 5e-4 / etc.) / lrd_exp / lrd_cos
 opt = "Adam"
 f_scl = "minmax"   # "minmax" / "mean"
-laaf = True
+laaf = False
 
 # system params
 c = 1.
