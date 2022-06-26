@@ -9,7 +9,7 @@ We also spot the strong fluctuation in loss function with constant learning rate
 Qualitative comparison between FDM and PINN is as follows (black solid line: FDM, red dashed line: PINN). 
 <img src="./figures/diffusion.png">
 
-Qantitative comparison between FDM and PINN is:
+Qantitative comparison between FDM and PINN:
 |t|0.0|0.2|0.4|0.6|0.8|1.0|
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |Rel. L2 error (scale: 1e-2)|1.358|0.509|0.359|0.272|0.265|2.839|
