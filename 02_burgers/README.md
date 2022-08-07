@@ -7,11 +7,6 @@ The following is the plot of the derived solution. Initial condition is negative
 <img src="./figures/Burgers.png">
 
 Qantitative comparison against simple FDM solution:
-|t|0.0||0.25|0.5|1.0|
-|:---:|:---:|:---:|:---:|:---:|
-|Rel. L2 error (scale: 1e-3)|0.29|0.36|0.21|3.97|
-
-
 |t|0.0|0.25|0.5|1.0|
 |:---:|:---:|:---:|:---:|:---:|
 |Rel. L2 error (scale: 1e-3)|0.29|0.36|0.21|3.97|
