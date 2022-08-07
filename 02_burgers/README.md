@@ -12,9 +12,9 @@ Qantitative comparison against simple FDM solution:
 |Rel. L2 error (scale: 1e-3)|0.29|0.36|0.21|3.97|
 
 
-|t|0.5|1.5|5.0|
-|:---:|:---:|:---:|:---:|
-|mse (&plusmn;sem) (scale: 1e-5)|0.297 (&plusmn;0.003)|0.551 (&plusmn;0.004)|4.273 (&plusmn;0.028)|
+|t|0.0|0.25|0.5|1.0|
+|:---:|:---:|:---:|:---:|:---:|
+|mse (&plusmn;sem) (scale: 1e-5)|0.297 (&plusmn;0.003)|0.551 (&plusmn;0.004)|4.273 (&plusmn;0.028)|4.273 (&plusmn;0.028)|
 
 
 ## Usage
