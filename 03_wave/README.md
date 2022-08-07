@@ -9,10 +9,10 @@ FDM simulation (at t = 0.5, 1.5, 5.0 (s)):
 PINN solution (at t = 0.5, 1.5, 5.0 (s)):
 <img src="./figures/PINN.png">
 
-With the present setting, the error between FDM and PINN is as follows (scale: 1e-5):
+With the present setting, the error between FDM and PINN is as follows:
 |t|0.5|1.5|5.0|
 |:---:|:---:|:---:|:---:|
-|mse (&plusmn;sem)|0.297 (&plusmn;0.003)|0.551 (&plusmn;0.004)|4.273 (&plusmn;0.028)|
+|mse (&plusmn;sem) (scale: 1e-5)|0.297 (&plusmn;0.003)|0.551 (&plusmn;0.004)|4.273 (&plusmn;0.028)|
 
 ## Usage
 Simply type
