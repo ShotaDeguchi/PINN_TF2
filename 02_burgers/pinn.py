@@ -41,7 +41,7 @@ class PINN(tf.keras.Model):
         self.w_0    = w_0      # weight for initial loss
         self.w_b    = w_b      # weight for boundary loss
         self.w_r    = w_r      # weight for residual loss
-        self.f_mntr = f_mntr    # monitoring frequency
+        self.f_mntr = f_mntr   # monitoring frequency
         
         # input-output pair
         self.t_0 = t_0; self.x_0 = x_0; self.u_0 = u_0   # evaluates initial condition
