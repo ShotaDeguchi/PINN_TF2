@@ -11,23 +11,11 @@ Further descriptions (usage, option, etc.) can be found in the corresponding dir
 
 ## CPU vs. GPU
 By default, our code trains PINNs on GPU. To run on CPU, one should refer to
-<br>
-<code>
-  main.py
-</code>
-<br>
+<code> main.py </code>
 and change 
-<br>
-<code>
-  with tf.device("/device:GPU:0"):
-</code>
-<br>
-to
-<br>
-<code>
-  with tf.device("/device:CPU:0"):
-</code>
-<br>
+<code> with tf.device("/device:GPU:0"): </code> 
+to 
+<code> with tf.device("/device:CPU:0"): </code> 
 in the corresponding directories (see [TF documentation](https://www.tensorflow.org/guide/gpu) for details). For our environment, GPU speed-up marked 25~30 times faster training time than CPU-based learning (Intel Core i7-9700 & NVIDIA GeForce RTX 2070 / AMD Core Ryzen9 5950X & NVIDIA GeForce RTX 3090). Mini-batch training is also possible if the model does not fit CPU/GPU memory, however, we recommend full-batching to appreciate the best possible speed-up (or large batch size). This is because CPU-GPU communication becomes frequent and slows down the overall performance when small batch size is chosen. 
 
 ## FDM simulation vs. PINN inference
