@@ -11,6 +11,7 @@ Further descriptions (usage, option, etc.) can be found in the corresponding dir
 |:---:|:---:|:---:|
 |![burgers](https://user-images.githubusercontent.com/49257696/162746099-bd030010-c819-4bba-87e9-cd1c26a59913.gif)|![diffusion](https://user-images.githubusercontent.com/49257696/162752724-ac8b022a-ab7a-4e45-9a74-e3dbee60113a.gif)|![wave](https://user-images.githubusercontent.com/49257696/162746233-4151ea3c-57b4-48ff-9f1c-d6fd69fe3dbb.gif)|
 
+<!--
 ## CPU vs. GPU
 By default, our code trains PINNs on GPU. To run on CPU, one should refer to
 <code> main.py </code>
@@ -22,6 +23,7 @@ in the corresponding directories (see [TF documentation](https://www.tensorflow.
 
 ## FDM simulation vs. PINN inference
 For most of the problems, this repo compares solutions yielded by FDM (Finite Difference Method) and PINN. Difference between them (we define this as PINN solution error) is reported in each directory. Regarding computational cost, PINN inference is faster than numerical integration by ~40x for <code>04_diffusion</code> in the same execution environment. Fair comparison was challenging for other problems, because we had to re-mesh the grid for FDM to converge (i.e. same mesh was employed for FDM and PINN in <code>04_diffusion</code>). 
+-->
 
 ## Dependencies
 <code>pip install -r requirements.txt</code> to have the identical environment as the author. Or install the following:
