@@ -17,28 +17,13 @@ Qantitative comparison between FDM and PINN:
 |SEM           (scale: 1e-8)|8.359|1.384|0.525|0.283|0.243|0.762|
 
 ## Usage
-Simply type
-<br>
-<code>
-  python main.py
-</code>
-<br>
-to run code (this includes PINN training and inferece, followed by FDM simulation, comparison). Basic parameters (e.g., network architecture, batch size, initializer, etc.) are found in 
-<br>
-<code>
-  params.py
-</code>
-<br>
-and could be modified depending on the problem setup. 
+```
+python main.py
+```
+to run code (this includes PINN training and inferece, followed by FDM simulation, comparison). Basic parameters (e.g., network architecture, batch size, initializer, etc.) are found in <code>params.py</code> and could be modified depending on the problem setup. 
 
 ## Dependencies
-Tested on 
-<br>
-<code>
-  python 3.8.10
-</code>
-<br>
-with the following:
+Tested with <code>python 3.8.10</code> and the following:
 
 |Package                      |Version|
 | :---: | :---: |
