@@ -15,28 +15,13 @@ With the present setting, the error between FDM and PINN is as follows:
 |mse (&plusmn;sem) (scale: 1e-5)|0.297 (&plusmn;0.003)|0.551 (&plusmn;0.004)|4.273 (&plusmn;0.028)|
 
 ## Usage
-Simply type
-<br>
-<code>
-  python main.py
-</code>
-<br>
-to run the entire code (this includes FDM simulation, PINN training, inferece, and comparison). Basic parameters (e.g., network architecture, batch size, initializer, etc.) are found in 
-<br>
-<code>
-  params.py
-</code>
-<br>
-and could be modified depending on the problem setup. 
+```
+python main.py
+```
+to run the entire code (this includes FDM simulation, PINN training, inferece, and comparison). Basic parameters (e.g., network architecture, batch size, initializer, etc.) are found in <code> params.py </code> and could be modified depending on the problem setup. 
 
 ## Dependencies
-Tested on 
-<br>
-<code>
-  python 3.8.10
-</code>
-<br>
-with the following:
+Tested with <code> python 3.8.10 </code> and the following environment:
 
 |Package                      |Version|
 | :---: | :---: |
