@@ -11,30 +11,14 @@ Qantitative comparison against simple FDM solution:
 |:---:|:---:|:---:|:---:|:---:|
 |Rel. L2 error (scale: 1e-3)|0.29|0.36|0.21|3.97|
 
-
 ## Usage
-Simply type
-<br>
-<code>
-  python main.py
-</code>
-<br>
-to run code (this includes PINN training, inferece, and visualization). Basic parameters (e.g., network architecture, batch size, initializer, etc.) are found in 
-<br>
-<code>
-  params.py
-</code>
-<br>
-and could be modified depending on the problem setup. 
+```
+python main.py
+```
+to run code (this includes PINN training and inferece, followed by FDM simulation, comparison). Basic parameters (e.g., network architecture, batch size, initializer, etc.) are found in <code>params.py</code> and could be modified depending on the problem setup. 
 
 ## Dependencies
-Tested on 
-<br>
-<code>
-  python 3.8.10
-</code>
-<br>
-with the following:
+Tested with <code>python 3.8.10</code> and the following:
 
 |Package                      |Version|
 | :---: | :---: |
