@@ -35,7 +35,7 @@ For most of the problems, this repo compares solutions yielded by FDM (Finite Di
 |tensorflow|2.8.0|
 
 ## Citation
-These codes are part of [our paper](https://doi.org/10.2208/jscejam.77.2_I_35). Please cite us as:
+These codes are part of our paper ( [jp](https://doi.org/10.2208/jscejam.77.2_I_35) / [en](https://www.jstage.jst.go.jp/article/jscejam/77/2/77_I_35/_article/-char/en) ). Please cite us as:
 ```
 @article{ShotaDEGUCHI2021,
   title={UNKNOWN PARAMETER ESTIMATION USING PHYSICS-INFORMED NEURAL NETWORKS WITH NOISED OBSERVATION DATA},
