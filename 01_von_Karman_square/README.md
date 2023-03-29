@@ -4,27 +4,13 @@ This is an implementation of [PINN(s)](https://doi.org/10.1016/j.jcp.2018.10.045
 
 ## Usage
 Simply type
-<br>
-<code>
-  python main.py
-</code>
-<br>
-to run the entire code. Basic parameters (e.g., network architecture, batch size, initializer, etc.) are found in 
-<br>
-<code>
-  params.py
-</code>
-<br>
-and could be modified depending on the problem setup. 
+```
+python main.py
+```
+to run the entire code. Basic parameters (e.g., network architecture, training epochs, batch size, initializer, etc.) are found in <code>params.py</code> and could be modified depending on the problem setup. 
 
 ## Dependencies
-Tested on 
-<br>
-<code>
-  python 3.8.10
-</code>
-<br>
-with the following:
+Tested on <code>python 3.8.10</code> with the following:
 
 |Package                      |Version|
 | :---: | :---: |
