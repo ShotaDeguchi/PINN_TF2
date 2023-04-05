@@ -9,7 +9,7 @@ import tensorflow as tf
 # network structure
 f_in  = 3
 f_out = 1
-width = 2 ** 8   # 2 ** 6 = 64, 2 ** 8 = 256
+width = 2 ** 6   # 2 ** 6 = 64, 2 ** 8 = 256
 depth = 5
 
 # training setting

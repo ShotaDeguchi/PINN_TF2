@@ -44,8 +44,13 @@ def main():
                 f_mntr = 10, r_seed = 1234)
     with tf.device("/device:GPU:0"):
         pinn.train(n_epch, n_btch, c_tol)
+
     plt.figure(figsize=(8,4))
     plt.plot(pinn.ep_log, pinn.loss_log, alpha=.7)
+    plt.xlabel("epoch")
+    plt.ylabel("loss")
+    plt.yscale("log")
+    plt.title("Loss history (1D Burgers)")
     plt.grid(alpha=.5)
     plt.show()
 
@@ -60,8 +65,7 @@ def main():
     u_hat, gv_hat = pinn.predict(t, x)
     t1 = time.time()
     elps = t1 - t0
-    print("elapsed time for PINN inference (sec):", elps)
-    print("elapsed time for PINN inference (min):", elps / 60.)
+    print("elapsed time for PINN inference:", elps, "(sec)", elps / 60., "(min)")
     plot_sol1(TX, u_hat .numpy(), -1, 1, .25)
     plot_sol1(TX, gv_hat.numpy(), -1, 1, .25)
 
@@ -89,8 +93,7 @@ def main():
                 + nu * dt / dx ** 2 * (u[i + 1, n] - 2 * u[i, n] + u[i - 1, n])
     t1 = time.time()
     elps = t1 - t0
-    print("elapsed time for FDM simulation (sec):", elps)
-    print("elapsed time for FDM simulation (sec):", elps / 60.)
+    print("elapsed time for FDM simulation:", elps, "(sec)", elps / 60., "(min)")
     plot_sol1(TX, u.reshape(-1, 1), -1, 1, .25)
 
 if __name__ == "__main__":
