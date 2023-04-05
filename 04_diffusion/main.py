@@ -20,8 +20,10 @@ def main():
 
     tmin, tmax, nt =  0., 1., int(2e3) + 1
     xmin, xmax, nx = -1., 1., int(2e2) + 1
-    t, x, TX = prp_grd(tmin, tmax, nt, 
-                       xmin, xmax, nx)
+    t, x, TX = prp_grd(
+        tmin, tmax, nt, 
+        xmin, xmax, nx
+    )
 
     in_dim, out_dim, width, depth, \
     w_init, b_init, act, \
@@ -49,9 +51,10 @@ def main():
 
     plt.figure(figsize=(8, 4))
     plt.plot(pinn.ep_log, pinn.loss_log, alpha=.7)
-    plt.yscale("log")
     plt.xlabel("epoch")
     plt.ylabel("loss")
+    plt.yscale("log")
+    plt.title("Loss history (1D diffusion)")
     plt.grid(alpha=.5)
     plt.show()
 
@@ -117,6 +120,7 @@ def main():
             plt.ylim(-1.2, 1.2)
             plt.xlabel("x", fontstyle = "italic")
             plt.ylabel("u", fontstyle = "italic")
+            plt.title("t = %.3f" % (n / nt))
             plt.grid(alpha = .5)
             plt.legend(loc = "lower right")
             plt.show()
