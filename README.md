@@ -39,7 +39,20 @@ For most of the problems, this repo compares solutions yielded by FDM (Finite Di
 ## Citation
 These codes are part of our paper ( [jp](https://doi.org/10.2208/jscejam.77.2_I_35) / [en](https://www.jstage.jst.go.jp/article/jscejam/77/2/77_I_35/_article/-char/en) ). Please cite us as:
 ```
-@article{ShotaDEGUCHI2021,
+@article{出口 翔大2021,
+  title={予測に物理的意味を付与した機械学習 PINNs による誤差を含む教師データからのパラメータ推定},
+  author={出口 翔大 and 柴田 洋佑 and 浅井 光輝},
+  journal={土木学会論文集A2（応用力学）},
+  volume={77},
+  number={2},
+  pages={I_35-I_45},
+  year={2021},
+  doi={10.2208/jscejam.77.2_I_35}
+}
+```
+or
+```
+@article{Shota DEGUCHI2021,
   title={UNKNOWN PARAMETER ESTIMATION USING PHYSICS-INFORMED NEURAL NETWORKS WITH NOISED OBSERVATION DATA},
   author={Shota DEGUCHI and Yosuke SHIBATA and Mitsuteru ASAI},
   journal={Journal of Japan Society of Civil Engineers, Ser. A2 (Applied Mechanics (AM))},
