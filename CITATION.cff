@@ -7,5 +7,5 @@ authors:
 title: "PINN implementation in TF2"
 version: 1.0.0
 doi: 10.5281/zenodo.1234
-date-released: 2023-08-30
+date-released: 2022-02-20
 url: "https://github.com/ShotaDeguchi/PINN_TF2"
