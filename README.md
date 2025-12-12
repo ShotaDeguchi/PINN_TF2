@@ -39,7 +39,7 @@ For most of the problems, this repo compares solutions yielded by FDM (Finite Di
 ## Citation
 These codes are part of our paper ( [jp](https://doi.org/10.2208/jscejam.77.2_I_35) / [en](https://www.jstage.jst.go.jp/article/jscejam/77/2/77_I_35/_article/-char/en) ). Please cite us as:
 ```
-@article{出口 翔大2021,
+@article{出口翔大2021,
   title={予測に物理的意味を付与した機械学習 PINNs による誤差を含む教師データからのパラメータ推定},
   author={出口 翔大 and 柴田 洋佑 and 浅井 光輝},
   journal={土木学会論文集A2（応用力学）},
@@ -52,7 +52,7 @@ These codes are part of our paper ( [jp](https://doi.org/10.2208/jscejam.77.2_I_
 ```
 or
 ```
-@article{Shota DEGUCHI2021,
+@article{ShotaDeguchi2021,
   title={UNKNOWN PARAMETER ESTIMATION USING PHYSICS-INFORMED NEURAL NETWORKS WITH NOISED OBSERVATION DATA},
   author={Shota DEGUCHI and Yosuke SHIBATA and Mitsuteru ASAI},
   journal={Journal of Japan Society of Civil Engineers, Ser. A2 (Applied Mechanics (AM))},
@@ -72,3 +72,4 @@ or
 [3] Rumelhart, D., Hinton, G., Williams, R.: Learning representations by back-propagating errors, *Nature*, Vol. 323, pp. 533–536, 1986. ([paper](https://doi.org/10.1038/323533a0))
 <br>
 [4] Jagtap, A.D., Kawaguchi, K., Karniadakis, GE.: Locally adaptive activation functions with slope recovery for deep and physics-informed neural networks, *Proceedings of Royal Society A*, pp. 4762020033420200334, 2020. ([paper](https://doi.org/10.1098/rspa.2020.0334))
+
